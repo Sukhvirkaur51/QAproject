@@ -1,0 +1,45 @@
+
+<div class="container size mt-4 mb-4" >
+  <div class="well text-center bold">
+    CONTACT US
+  </div>
+  <br><br>
+  <form >
+    Your Name:
+    <input
+    type="text"
+    name="username"
+    class="form-control">
+    <br><br>
+    Your Email:
+    <input
+    type="text"
+    name="email"
+    class="form-control">
+    <br><br>
+
+    <mat-form-field appearance="fill"  class="swidth">
+      <mat-label>Select Purpose</mat-label>
+      <mat-select>
+        <mat-option value ="Feedback">Feedback</mat-option>
+        <mat-option value ="Suggestions">Suggestions</mat-option>
+        <mat-option value ="Correction Required" >Correction Required</mat-option>
+        <mat-option value ="General query" >General Query</mat-option>
+
+
+      </mat-select>
+    </mat-form-field>
+    <br><br>
+    <textarea class="form-control" rows="3" placeholder="Share Details"></textarea>
+    <br><br>
+    <!-- <button type="submit"
+    class="btn btn-secondary mb-3">Submit </button>
+
+    <button type="reset"
+    class="btn btn-secondary mb-3"> Reset</button> -->
+
+    <button type="submit" mat-stroked-button class="butn mb-4">Submit</button> &nbsp;
+    <button type="reset" mat-stroked-button class="butn ml-5 mb-4" > Reset</button>
+  </form>
+
+</div>

@@ -1,0 +1,45 @@
+/* .mainbox{ */
+  /* width: 50%; */
+  /* border: 1px solid rebeccapurple; */
+/* } */
+.mainbox div.heading{
+  width: 30%;
+  /* border: 1px solid red; */
+  font-size: 1.9rem;
+  font-weight: 400;
+  font-family: 'Orelega One', cursive;
+}
+select.to{
+  margin-left: 0.3rem;
+   width: 10%;
+   height: 1.2rem;
+   border-radius: 10px;
+}
+.tips{
+  background-color: #EBF0FF;
+  color: #2E69FF;
+  width: 80%;
+}
+.tips p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color:#2E69FF ;
+  /* margin-top: 3em; */
+}
+span.username{
+  color: #282829;
+  font-weight: bold;
+}
+
+button.subutton{
+  background-color: #2E69FF;
+  color: #EBF0FF;
+  width: 30%;
+}
+.matwidth{
+  width: 90%;
+}
+/* .divw{
+  width:70%;
+} */
+

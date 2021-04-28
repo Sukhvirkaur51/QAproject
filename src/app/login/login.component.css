@@ -1,0 +1,17 @@
+mat-card
+{
+  width: 50%;
+  margin-left: 20%;
+  background-color:whitesmoke;
+}
+
+
+mat-form-field,input
+{
+  width: 70%;
+}
+mat-toolbar{
+  background-color: white;
+}
+
+

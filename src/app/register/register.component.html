@@ -1,0 +1,134 @@
+<mat-card class="mt-3 mb-4">
+  <mat-toolbar>Register Yourself</mat-toolbar>
+  <br><br>
+  <form [formGroup]="Registerform"(ngSubmit)="onSubmit()">
+      <mat-form-field>
+          <input
+          type="text"
+          matInput
+          placeholder="First Name"
+          formControlName="fname"
+          [ngClass]="{'is-invalid':submitted && fun.fname.errors}"
+          >
+      </mat-form-field>
+
+      <div *ngIf= "submitted && fun.fname.errors">
+        <div *ngIf="fun.fname.errors?.required">
+       First Name should be entered
+        </div>
+      </div>
+      <br><br>
+
+      <mat-form-field>
+        <input
+        type="text"
+        matInput
+        placeholder="Last Name"
+        formControlName="lname"
+        [ngClass]="{'is-invalid':submitted && fun.lname.errors}"
+        >
+    </mat-form-field>
+
+    <div *ngIf= "submitted && fun.lname.errors">
+      <div *ngIf="fun.lname.errors?.required">
+     Last Name should be entered
+      </div>
+    </div>
+    <br><br>
+
+      <mat-form-field>
+          <input
+           type="text"
+           matInput
+           placeholder="Your Email"
+           formControlName="email"
+           [ngClass]="{'is-invalid':submitted && fun.email.errors}">
+      </mat-form-field>
+
+      <div *ngIf= "submitted && fun.email.errors">
+        <div *ngIf= "fun.email.errors?.required">
+        Email should be entered
+        </div>
+        <div *ngIf= "fun.email.errors?.email">
+          Invalid format
+         </div>
+      </div>
+      <br><br>
+
+
+      <mat-form-field>
+        <input
+        type="password"
+        matInput  [type]="hide ? 'password' : 'text'"
+        placeholder="Enter Password"
+        formControlName="password"
+        [ngClass]="{'is-invalid':submitted && fun.password.errors}">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+      </mat-form-field>
+
+      <div *ngIf= "submitted && fun.password.errors">
+        <div *ngIf="fun.password.errors?.required">
+        password should be entered
+        </div>
+        <div *ngIf="fun.password.errors?.minlength">
+          password should be greater than 5
+         </div>
+      </div>
+      <br> <br>
+
+      <mat-form-field>
+        <input
+        type="password"
+        matInput  [type]="hide1 ? 'password' : 'text'"
+        placeholder="Enter confirm password"
+        formControlName="confirmpassword"
+        [ngClass]="{'is-invalid':submitted && fun.confirmpassword.errors}">
+
+        <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide1">
+          <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+      </mat-form-field>
+
+      <div *ngIf= "submitted && fun.confirmpassword.errors">
+        <div *ngIf="fun.confirmpassword.errors?.required">
+        Confirm password should be entered
+        </div>
+        <div *ngIf="fun.confirmpassword.errors.mustMatch">
+          password and confirm password must match
+        </div>
+      </div>
+
+      <br><br>
+      <mat-form-field>
+       <mat-select
+        placeholder="Profile"
+        formControlName="profile"
+        [ngClass]="{'is-invalid':submitted && fun.profile.errors}">
+        <mat-option value ="Student">Student</mat-option>
+        <mat-option value ="Professor">Professor</mat-option>
+        <mat-option value ="Developer" >Developer</mat-option>
+        <mat-option value ="Tester" >Tester</mat-option>
+        <mat-option value ="Debugger">Debugger</mat-option>
+        <mat-option value ="Other">Other</mat-option>
+      </mat-select>
+      </mat-form-field>
+
+      <div *ngIf= "submitted && fun.profile.errors">
+        <div *ngIf="fun.profile.errors?.required">
+        Profile should choose
+        </div>
+      </div>
+      <br><br>
+
+
+
+    <button type="submit" mat-raised-button color="primary">Register</button>
+    <button type="reset" mat-raised-button class="butn ml-4 mb-4 width" > Reset</button>
+  </form>
+</mat-card>
+
+

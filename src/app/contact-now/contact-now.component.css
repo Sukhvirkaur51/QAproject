@@ -1,0 +1,19 @@
+
+.bold{
+  font-weight: bold;
+  font-size: 200%;
+}
+
+.size{
+  width: 60%;
+}
+
+.swidth{
+  width: 100%;
+}
+.butn{
+  background-color:#0000000A;
+  color: black;
+  width: 30%;
+
+}
