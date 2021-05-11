@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-login',
@@ -9,17 +10,31 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(public userserviceobj:UserService,private router:Router) { }
 
   ngOnInit(): void {
   }
 
 
-  getvalues(f:NgForm){
-    console.log(f.value);
+  userdata:any=[];
 
-    this.router.navigateByUrl('/questions')
-  }
+   logindata(f:NgForm){
+    this.userserviceobj.login(f.value).subscribe((res)=>{
+      this.userdata=res;
+      console.log(this.userdata.token);     //returns token in normal form
 
-  model:any=[];
+      this.userserviceobj.setToken(this.userdata.token); //store token which is in res.
+      this.userserviceobj.setuserid(this.userdata.user._id); //store user id presnt in response
+      console.log(res);      // res is "token" and "user".... backend response
+      alert('login successfully');
+      this.router.navigateByUrl('/profile');
+    },(err)=>{
+      console.log(err);
+      alert('login first');
+
+
+    }
+
+    )
+   }
 }

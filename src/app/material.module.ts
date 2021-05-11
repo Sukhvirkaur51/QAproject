@@ -12,11 +12,13 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
-  imports: [MatFormFieldModule,MatButtonModule, MatRadioModule,MatCheckboxModule,MatToolbarModule,MatInputModule,MatSelectModule,MatCardModule,MatDialogModule,MatIconModule,MatExpansionModule],
-  exports: [MatFormFieldModule,MatButtonModule, MatRadioModule,MatCheckboxModule,MatToolbarModule,MatInputModule,MatSelectModule,MatCardModule,MatDialogModule,MatIconModule,MatExpansionModule]
+  imports: [MatFormFieldModule,MatButtonModule, MatRadioModule,MatCheckboxModule,MatToolbarModule,MatInputModule,MatSelectModule,MatCardModule,MatDialogModule,MatIconModule,MatExpansionModule,MatTabsModule,MatDividerModule],
+  exports: [MatFormFieldModule,MatButtonModule, MatRadioModule,MatCheckboxModule,MatToolbarModule,MatInputModule,MatSelectModule,MatCardModule,MatDialogModule,MatIconModule,MatExpansionModule,MatTabsModule,MatDividerModule]
 })
 
 

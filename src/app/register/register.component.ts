@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MustMatch } from 'src/app/helpVal/mustmatch.validator';
+import { UserService } from '../shared/user.service';
+
 
 @Component({
   selector: 'app-register',
@@ -9,43 +10,38 @@ import { MustMatch } from 'src/app/helpVal/mustmatch.validator';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  Registerform!:FormGroup
 
-  constructor(private formbuilder:FormBuilder ,private router:Router) { }
+
+  constructor(public userserviceobj:UserService ,private router:Router) { }
 
   submitted=false
   hide = true;
   hide1= true;
 
-  ngOnInit(): void {
-    this.Registerform=this.formbuilder.group({
 
-      fname: ['',Validators.required],
-      lname: ['',Validators.required],
-      email:['',[Validators.required,Validators.email]] ,
-      profile:['',Validators.required] ,
-      password:['',[Validators.required,Validators.minLength(5)]],
-      confirmpassword:['',Validators.required],
+  ngOnInit(): void{}
 
 
-    },
-    {
-      validator: MustMatch('password','confirmpassword')
 
-    });
+  adduser(f:NgForm){
+    console.log(f.value);
+    this.userserviceobj.register(f.value).subscribe((res)=>{
+      console.log(res);
+      alert('Register Successfully');
+      this.router.navigateByUrl('/login');
+
+    },(err)=>{
+      console.log(err);
+      alert('Register first');
     }
-    get fun(){            //inbuilt get method to get form values
-  return this.Registerform.controls;
-    }
-  onSubmit(){
-    this.submitted=true;
-    if(this.Registerform.invalid)
-    return;
+    )
 
-    this.router.navigateByUrl('/login');
+  }
+
+
 
 
   }
-  }
+
 
 

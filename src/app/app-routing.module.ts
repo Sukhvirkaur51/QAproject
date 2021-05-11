@@ -3,8 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddQueComponent } from './add-que/add-que.component';
 import { AnswersComponent } from './answers/answers.component';
 import { ContactNowComponent } from './contact-now/contact-now.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
@@ -41,6 +43,14 @@ const routes: Routes = [
   {
     path:'addque',
     component:AddQueComponent
+  },
+  {
+    path:'editprofile',
+    component:EditprofileComponent
+  },
+  {
+    path:'logout',
+    component:LogoutComponent
   }
 ];
 

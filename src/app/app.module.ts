@@ -13,6 +13,7 @@ import { RecentAreaComponent } from './recent-area/recent-area.component';
 import { RequestComponent } from './request/request.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import{HttpClientModule} from '@angular/common/http';
 
 // forms
 
@@ -31,11 +32,14 @@ import { HelpComponent } from './help/help.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AnswersComponent } from './answers/answers.component';
 import { AddQueComponent } from './add-que/add-que.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { MaterialModule} from './material.module';
 
 
 import { CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { EditprofileComponent } from './editprofile/editprofile.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +63,8 @@ import { CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
     ProfileComponent,
     AnswersComponent,
     AddQueComponent,
+    EditprofileComponent,
+    LogoutComponent,
 
   ],
   imports: [
@@ -67,7 +73,9 @@ import { CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule,
+    MatMenuModule
 ],
   providers: [],
   bootstrap: [AppComponent],

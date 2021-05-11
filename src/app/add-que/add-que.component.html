@@ -36,23 +36,49 @@
 
        </select>-->
        <br><br>
-      <form action="#" class="ml-4">
+
+
+      <form action="#" class="ml-4" #questionform="ngForm" (ngSubmit)="onadd(questionform)">
+        <input
+        type="hidden"
+        name="user"
+        #user="ngModel"
+        [(ngModel)]="userserviceobj.newquestion.user"
+
+        >
+
        <mat-form-field class="matwidth" >
          <mat-label> Category of question</mat-label>
-         <mat-select >
+         <mat-select
+         name="category"
+        #category="ngModel"
+        [(ngModel)]="userserviceobj.newquestion.category"
+         >
            <mat-option value="Music">Music</mat-option>
            <mat-option value="Education">Education</mat-option>
            <mat-option value="Sports">Sports</mat-option>
            <mat-option value="Technical">Technical</mat-option>
 
-         </mat-select>
-       </mat-form-field>
+     </mat-select>
+
+    </mat-form-field>
+
+
        <mat-form-field class="matwidth">
-         <input matInput placeholder="Write your question here." >
+         <input matInput placeholder="Write your question here."
+         name="question"
+        #question="ngModel"
+        [(ngModel)]="userserviceobj.newquestion.question" >
        </mat-form-field>
+
+
        <mat-form-field class="matwidth">
-         <input matInput placeholder="About your question(in detail)" >
+         <input matInput placeholder="About your question(in detail)"
+         name="about"
+        #about="ngModel"
+        [(ngModel)]="userserviceobj.newquestion.about">
        </mat-form-field>
+
        <button mat-raised-button class="subutton mt-2 mb-3 " type="submit">Submit</button>
       </form>
      </div>
