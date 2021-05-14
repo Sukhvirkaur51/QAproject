@@ -33,6 +33,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { AnswersComponent } from './answers/answers.component';
 import { AddQueComponent } from './add-que/add-que.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 import { MaterialModule} from './material.module';
 
@@ -40,6 +44,7 @@ import { MaterialModule} from './material.module';
 import { CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { LogoutComponent } from './logout/logout.component';
+import { AddcredentialsComponent } from './addcredentials/addcredentials.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +70,7 @@ import { LogoutComponent } from './logout/logout.component';
     AddQueComponent,
     EditprofileComponent,
     LogoutComponent,
+    AddcredentialsComponent,
 
   ],
   imports: [
@@ -75,7 +81,9 @@ import { LogoutComponent } from './logout/logout.component';
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
-    MatMenuModule
+    MatMenuModule,
+    MatNativeDateModule,
+    MatDatepickerModule
 ],
   providers: [],
   bootstrap: [AppComponent],

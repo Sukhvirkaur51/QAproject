@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddQueComponent } from './add-que/add-que.component';
+import { AddcredentialsComponent } from './addcredentials/addcredentials.component';
 import { AnswersComponent } from './answers/answers.component';
 import { ContactNowComponent } from './contact-now/contact-now.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
@@ -10,6 +11,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
    {
@@ -30,11 +32,13 @@ const routes: Routes = [
   },
   {
     path:'contact',
-    component:ContactNowComponent
+    component:ContactNowComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'profile',
-    component:ProfileComponent
+    component:ProfileComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'answers',
@@ -51,6 +55,10 @@ const routes: Routes = [
   {
     path:'logout',
     component:LogoutComponent
+  },
+  {
+    path:'addcredentials',
+    component:AddcredentialsComponent
   }
 ];
 

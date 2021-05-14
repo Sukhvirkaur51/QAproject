@@ -80,6 +80,26 @@
                     </mat-error>
                     <br>
 
+                    <div class="form-group">
+                      <label for="contact"><mat-icon matSuffix>phone</mat-icon></label>
+                      <input type="text" name="contact" id="contact" placeholder="Contact Number"
+                      #contact="ngModel" [(ngModel)]="userserviceobj.regnew.contact"
+                      required
+                      [ngClass]="{'is-invalid':registerform.submitted && contact.invalid}"
+                      [pattern]="contactNumberPattern"/>
+                    </div>
+
+                     <mat-error *ngIf= "registerform.submitted && contact.invalid">
+                      <mat-error *ngIf="contact.errors?.required">
+                        Contact Number should be entered
+                      </mat-error>
+
+                      <mat-error *ngIf="contact.errors?.pattern">
+                        Contact number is not valid
+                      </mat-error>
+                    </mat-error>
+                    <br>
+
 
                   <div class="form-group">
                       <label for="password"><i class="zmdi zmdi-lock"></i></label>
@@ -131,9 +151,19 @@
 
 
                   <!-- <div class="form-group">
-                      <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                      <input type="checkbox" name="agree-term" id="agree-term" class="agree-term"
+                      required
+                      [ngClass]="{'is-invalid':registerform.submitted && agree-term.invalid}" />
                       <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
-                  </div>  -->
+
+                    </div>
+
+                    <mat-error *ngIf= "registerform.submitted && agree-term.invalid">
+                      <mat-error  *ngIf="agree-term.errors?.required">
+                       Accept terms and conditions
+                      </mat-error>
+                    </mat-error> -->
+
                   <div class="form-group form-button">
                       <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
                   </div>

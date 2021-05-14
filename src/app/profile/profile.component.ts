@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AddQueComponent } from '../add-que/add-que.component';
+import { AddcredentialsComponent } from '../addcredentials/addcredentials.component';
 import { EditprofileComponent } from '../editprofile/editprofile.component';
 import { UserService } from '../shared/user.service';
 
@@ -16,8 +18,14 @@ export class ProfileComponent implements OnInit {
   userdata:any=[];
   userinfo:any=[];
 
-  quesresponse:any;
+  quesresponse:any=[];
   que:any=[];
+
+  answerresponse:any=[];
+  ans:any=[];
+
+  credentialdata:any=[];
+  cred:any=[];
 
   ngOnInit(): void {
 
@@ -30,7 +38,7 @@ export class ProfileComponent implements OnInit {
        console.log(this.userinfo);   //give userinfo on console without success and msg in backend format.
     })
 
-    this.userserviceobj.displayques(this.userserviceobj.getuserid()).subscribe((res)=>{
+    this.userserviceobj.displayques(this.id).subscribe((res)=>{
       this.quesresponse=res;
       this.que=this.quesresponse.data;
       console.log(this.que);
@@ -38,20 +46,38 @@ export class ProfileComponent implements OnInit {
     ,(err)=>{
       console.log(err);
 
-
     }
     )
+
+    this.userserviceobj.displaycredentials(this.id).subscribe((res)=>{
+            this.credentialdata=res;
+            console.log(res);
+            this.cred=this.credentialdata.data;
+            console.log(this.cred[0]);
+    }
+    ,(err)=>{
+      console.log(err);
+
+    }
+
+
+    )
+    // this.userserviceobj.credentialsdata();
 
 
 }
 
 askque(){
-this.router.navigateByUrl('/addque');
+this.dialog.open(AddQueComponent);
 }
 
-followinterests(){
-  // this.dialog.open();
- }
+addcred(){
+  const dialogRef= this.dialog.open(AddcredentialsComponent,{
+    height: '800px',
+    width: '800px'});
+
+}
+
  logout(){
   this.router.navigateByUrl('/logout');
  }

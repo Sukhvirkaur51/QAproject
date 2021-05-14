@@ -3,9 +3,13 @@ const mongoose=require('mongoose');
 require('../config/passportconfig')
 require('../model/usermodel');
 require('../model/questionmodel');
+require('../model/addcredmodel');
+require('../model/answermodel');
 
 var regData=mongoose.model('register');
 var queData=mongoose.model('question');
+var credData=mongoose.model('addcredentials');
+var ansData=mongoose.model('answer');
 
 const passport = require('passport');
 const jwt=require('jsonwebtoken');
@@ -15,7 +19,8 @@ module.exports.addnew=(req,res)=>{
         firstname:req.body.firstname,
         lastname:req.body.lastname,
         email:req.body.email,
-        password:req.body.password
+        password:req.body.password,
+        contact:req.body.contact
     });
     reg.save().then((docs)=>{
         return res.status(200).json({
@@ -90,7 +95,7 @@ module.exports.addquestions=(req,res)=>{
 })
 }
 
-//display display questions
+//display questions
 
 module.exports.displayquestion=(req,res)=>{
   return queData.find({user:req.params.userid}).populate('user').exec().then((docs)=>{
@@ -107,3 +112,90 @@ module.exports.displayquestion=(req,res)=>{
 })
 })
 }
+
+//add credentials
+module.exports.addcredentials=(req,res)=>{
+  var credentials=new credData({
+    location:req.body.location,
+    dateofbirth:req.body.dateofbirth,
+    education:req.body.education,
+    address:req.body.address,
+    profile:req.body.profile,
+    workexperience:req.body.workexperience,
+    user:req.body.user
+  });
+  credentials.save().then((docs)=>{
+ return res.status(200).json({
+  success:true,
+  message:'credentials added successfully',
+  data:docs
+
+ })
+  }).catch((err)=>{
+    return res.status(400).json({
+      success:false,
+      message:'error in adding',
+      error:err.message
+  })
+})
+}
+
+//display credentials
+
+module.exports.displaycredentials=(req,res)=>{
+  return credData.find({user:req.params.userid}).populate('user').exec().then((docs)=>{
+    return res.status(200).json({
+      success:true,
+      message:'display credentials',
+      data:docs
+  })
+}).catch((err)=>{
+  return res.status(400).json({
+    success:false,
+    message:'error in displaying',
+    error:err.message
+})
+})
+}
+
+//add answers
+module.exports.addanswers=(req,res)=>{
+  var myanswer=new ansData({
+    answer:req.body.answer,
+    questionid:req.body.questionid,
+    userid:req.body.userid
+  });
+  myanswer.save().then((docs)=>{
+ return res.status(200).json({
+  success:true,
+  message:'new answer added',
+  data:docs
+
+ })
+  }).catch((err)=>{
+    return res.status(400).json({
+      success:false,
+      message:'error in adding',
+      error:err.message
+  })
+})
+}
+
+//display answer
+
+module.exports.displayanswer=(req,res)=>{
+  return ansData.find({questionid:req.params.questionid}).populate('questionid').exec().then((docs)=>{
+    return res.status(200).json({
+      success:true,
+      message:'list of answers',
+      data:docs
+  })
+}).catch((err)=>{
+  return res.status(400).json({
+    success:false,
+    message:'error in displaying',
+    error:err.message
+})
+})
+}
+

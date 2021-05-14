@@ -2,16 +2,54 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import{User,Loginuser} from './user.model';
 import{Question} from './question.model';
+import{Addcredentials} from './addcredentials.model';
+import{Answer} from './answer.model'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  credentialdata:any=[];
+  cred:any=[];
+
+//   quesresponse:any=[];
+//   que:any=[];
+
+
+
+  credentialsdata(){
+  this.displaycredentials(this.getuserid()).subscribe((res)=>{
+    this.credentialdata=res;
+    this.cred=this.credentialdata.data;
+    console.log(this.cred);
+}
+,(err)=>{
+console.log(err);
+
+})
+  }
+
+
+  // questionData(){
+  //   this.displayques(this.getuserid).subscribe((res)=>{
+  //     this.quesresponse=res;
+  //     console.log(res);
+  //     this.que=this.quesresponse.data;
+  //     console.log(this.que[0]._id);
+  //     console.log("question added successfully");
+  //   }
+  //   ,(err)=>{
+  //     console.log(err);
+  //   }
+  //   )
+  // }
+
   public regnew:User={
     firstname:'',
     lastname:'',
     email:'',
+    contact:'',
     password:'',
     confirmpassword:'',
 
@@ -27,9 +65,25 @@ export class UserService {
     category:'',
     about:'',
     user:this.getuserid()
-
-
   };
+
+public addcred:Addcredentials={
+  location:this.cred.location,
+  profile:this.cred.profile,
+  education:this.cred.education,
+  dateofbirth:this.cred.dateofbirth,
+  workexperience:this.cred.workexperience,
+  address:this.cred.address,
+  user:this.getuserid()
+};
+
+public answers:Answer={
+  answer:'',
+  questionid:'',
+  // questionid:this.que[0]._id,
+  userid:this.getuserid()
+};
+
 
   constructor(private http:HttpClient) { }
 
@@ -60,7 +114,17 @@ displayques(id:any){
   return this.http.get('http://localhost:3200/displayques/'+id);
 }
 
+addcredentials(credentials:Addcredentials){
+  return this.http.post('http://localhost:3200/addcred', credentials);
+}
 
+displaycredentials(id:any){
+  return this.http.get('http://localhost:3200/displaycred/'+id);
+}
+
+addanswer(answers:Answer){
+  return this.http.post('http://localhost:3200/addans',answers);
+};
 
 
 //use localstorage to store token
@@ -114,5 +178,18 @@ deleteuserid(){
   localStorage.removeItem('userid');
 }
 
+
+// setquestionid(id:any){
+//   localStorage.setItem('questionid',id);
+// }
+
+// getquestionid(){
+//   localStorage.getItem('questionid');
+
+// }
+
+// deletequestionid(){
+//   localStorage.removeItem('questionid');
+// }
 
 }

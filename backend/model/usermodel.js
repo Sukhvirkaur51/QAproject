@@ -15,6 +15,10 @@ var registerSchema=mongoose.Schema({
         type:String,
         unique:[true,"email already exists"]
     },
+    contact:{
+      type:String,
+      minlength:[10,'inavlid phone number']
+    },
     password:{
         type:String,
         required:[true,"password cannot be empty"],

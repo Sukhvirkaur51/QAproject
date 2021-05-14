@@ -14,9 +14,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(public userserviceobj:UserService ,private router:Router) { }
 
-  submitted=false
-  hide = true;
-  hide1= true;
+  contactNumberPattern="^[6-9][0-9]{9}$";
+
+
 
 
   ngOnInit(): void{}
