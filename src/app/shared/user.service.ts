@@ -17,6 +17,25 @@ export class UserService {
 //   que:any=[];
 
 
+id:any;
+  userdata:any=[];
+  userinfo:any=[];
+
+  previousinfo(){
+  this.id=this.getuserid();
+    console.log(this.id);
+    this.userdata=this.display(this.id).subscribe((res)=>{
+      // with display method returns success,msg,data
+
+      console.log(res);
+      this.userdata=res;
+      this.userinfo=this.userdata.data;
+      console.log(this.userinfo);
+
+     })
+    }
+
+
 
   credentialsdata(){
   this.displaycredentials(this.getuserid()).subscribe((res)=>{
@@ -46,10 +65,10 @@ console.log(err);
   // }
 
   public regnew:User={
-    firstname:'',
-    lastname:'',
-    email:'',
-    contact:'',
+    firstname:this.userinfo.firstname,
+    lastname:this.userinfo.lastname,
+    email:this.userinfo.email,
+    contact:this.userinfo.contact,
     password:'',
     confirmpassword:'',
 
@@ -125,6 +144,14 @@ displaycredentials(id:any){
 addanswer(answers:Answer){
   return this.http.post('http://localhost:3200/addans',answers);
 };
+
+displayanswer(){
+
+}
+
+updateuser(selected:User){
+  return this.http.put(`${'http://localhost:3200/updateRecord'}/${this.getuserid()}`,selected);
+}
 
 
 //use localstorage to store token

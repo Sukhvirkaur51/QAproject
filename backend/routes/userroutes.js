@@ -16,5 +16,7 @@ approute.get('/displaycred/:userid',myctrl.displaycredentials); //get credential
 approute.post('/addans',myctrl.addanswers);       //add answer to db
 approute.get('/displayans/:questionid',myctrl.displayanswer); //get answers
 
+approute.put('/updateRecord/:id',myctrl.updatedData);  //for update
+
 
 module.exports=approute

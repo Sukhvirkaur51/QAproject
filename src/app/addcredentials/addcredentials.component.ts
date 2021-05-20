@@ -36,4 +36,8 @@ export class AddcredentialsComponent implements OnInit {
 
   }
 
+  close(){
+    this.dialog.closeAll();
+  }
+
 }

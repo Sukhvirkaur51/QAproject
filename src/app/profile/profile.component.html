@@ -91,8 +91,7 @@
                                         <label>FirstName</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{userinfo.firstname}}
-                                          </p>
+                                        <p>{{userinfo.firstname}} </p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -137,7 +136,7 @@
                                       <label>Location</label>
                                   </div>
                                   <div class="col-md-6">
-                                      <p>{{cred[0].location}}</p>
+                                      <!-- <p>{{cred.location}}</p> -->
                                   </div>
                               </div>
                               <div class="row">
@@ -145,7 +144,7 @@
                                     <label>Date Of Birth</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{cred[0].dateofbirth}}</p>
+                                    <!-- <p>{{cred.dateofbirth}}</p> -->
                                 </div>
                             </div>
                             <div class="row">
@@ -153,7 +152,7 @@
                                   <label>Address</label>
                               </div>
                               <div class="col-md-6">
-                                  <p>{{cred[0].address}}</p>
+                                  <!-- <p>{{cred.address}}</p> -->
                               </div>
                           </div>
                           <div class="row">
@@ -161,7 +160,7 @@
                                 <label>Profile</label>
                             </div>
                             <div class="col-md-6">
-                                <p>{{cred[0].profile}}</p>
+                                <!-- <p>{{cred.profile}}</p> -->
                             </div>
                         </div>
                         <div class="row">
@@ -169,7 +168,7 @@
                               <label>Work Experience</label>
                           </div>
                           <div class="col-md-6">
-                              <p>{{cred[0].workexperience}}</p>
+                              <!-- <p>{{cred.workexperience}}</p> -->
                           </div>
                       </div>
                       <div class="row">
@@ -177,13 +176,14 @@
                             <label>Education</label>
                         </div>
                         <div class="col-md-6">
-                            <p>{{cred[0].education}}</p>
+                            <!-- <p>{{cred.education}}</p> -->
                         </div>
                     </div>
                     </div>
-                    <div class="tab-pane fade" id="question" role="tabpanel" aria-labelledby="question-tab">
 
-                        <div class="container Heading shadow-sm p-3 bg-body rounded " *ngFor="let que1 of que">
+                    <div class="tab-pane fade" id="question" role="tabpanel" aria-labelledby="question-tab"    >
+                       <div *ngIf="que.length; else noques">
+                        <div class="container Heading shadow-sm p-3 bg-body rounded " *ngFor="let que1 of que"  >
                           <span class="follow">
                             Question added.
                           </span>
@@ -252,7 +252,16 @@
                           </div>
                        </div>
                        <button class="mt-3 ml-4" mat-raised-button color="primary" (click)="askque()">Ask more Questions</button>
-                    </div>
+                      </div>
+                       <ng-template #noques>
+                        <h3>You haven't asked any question yet.</h3>
+                        <button class="mt-3 ml-4" mat-raised-button color="primary" (click)="askque()">Ask Questions</button>
+                      </ng-template>
+
+
+                      </div>
+
+
 
                     <div class="tab-pane fade" id="answer" role="tabpanel" aria-labelledby="answer-tab">
 

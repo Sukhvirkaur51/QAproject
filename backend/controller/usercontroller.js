@@ -199,3 +199,25 @@ module.exports.displayanswer=(req,res)=>{
 })
 }
 
+//update data by id
+module.exports.updatedData=(req,res)=>{
+
+  var updatedData=req.body;
+
+  regData.findByIdAndUpdate({_id:req.params.id},{$set:updatedData},{new:true})
+  .then((docs)=>{
+      return res.status(200).json({
+          success:true,
+          message:'Data updated',
+          data:docs
+      })  })
+      .catch((err)=>{
+          return res.status(401).json({
+              success:false,
+              message:"error in updating data",
+              error:err.message
+          })
+      })
+
+}
+

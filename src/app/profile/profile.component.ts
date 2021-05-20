@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   ans:any=[];
 
   credentialdata:any=[];
-  cred:any=[];
+  cred:any;
 
   ngOnInit(): void {
 
@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
             this.credentialdata=res;
             console.log(res);
             this.cred=this.credentialdata.data;
-            console.log(this.cred[0]);
+            console.log(this.cred);
     }
     ,(err)=>{
       console.log(err);
@@ -82,7 +82,9 @@ addcred(){
   this.router.navigateByUrl('/logout');
  }
  editprofile(){
-   this.dialog.open(EditprofileComponent);
+   this.dialog.open(EditprofileComponent ,{
+    height: '700px',
+    width: '800px'});
  }
 
 }

@@ -42,6 +42,10 @@ export class AddQueComponent implements OnInit {
 
   }
 
+  close(){
+    this.dialog.closeAll();
+  }
+
   }
 
 

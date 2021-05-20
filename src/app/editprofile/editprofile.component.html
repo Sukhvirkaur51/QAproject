@@ -1,1 +1,65 @@
-<p>editprofile works!</p>
+
+<mat-card>
+
+  <button type="button" class="close" (click)="close()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <br><br>
+  <mat-toolbar>Edit User Details</mat-toolbar>
+  <br> <br>
+  <form #updateform="ngForm" (ngSubmit)="OnSubmit(updateform)">
+   <mat-form-field>
+     <input
+     type="text"
+      name="firstname"
+      value={{userinfo.firstname}}
+      [(ngModel)]="userserviceobj.regnew.firstname"
+        #firstname="ngModel"
+      matInput
+      placeholder="FirstName">
+   </mat-form-field>
+   <br><br>
+
+   <mat-form-field>
+    <input
+    type="text"
+     name="lastname"
+     value={{userinfo.lastname}}
+     [(ngModel)]="userserviceobj.regnew.lastname"
+        #lastname="ngModel"
+     matInput
+     placeholder="lastName">
+  </mat-form-field>
+  <br><br>
+
+   <mat-form-field>
+    <input
+    type="text"
+     name="email"
+     value={{userinfo.email}}
+     [(ngModel)]="userserviceobj.regnew.email"
+    #email="ngModel"
+     matInput
+     placeholder="Email">
+  </mat-form-field>
+  <br><br>
+
+  <mat-form-field>
+    <input
+    type="text"
+     name="contact"
+     value={{userinfo.contact}}
+     [(ngModel)]="userserviceobj.regnew.contact"
+    #contact="ngModel"
+     matInput
+     placeholder="Contact">
+  </mat-form-field>
+  <br><br>
+
+
+  <button type="submit" mat-raised-button color="primary">Update User</button>
+
+  </form>
+</mat-card>
+
+
