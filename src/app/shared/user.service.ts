@@ -4,6 +4,8 @@ import{User,Loginuser} from './user.model';
 import{Question} from './question.model';
 import{Addcredentials} from './addcredentials.model';
 import{Answer} from './answer.model'
+import { Observable } from 'rxjs';
+import { Profile } from './profile.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,56 +15,27 @@ export class UserService {
   credentialdata:any=[];
   cred:any=[];
 
-//   quesresponse:any=[];
-//   que:any=[];
-
 
 id:any;
   userdata:any=[];
   userinfo:any=[];
 
-  previousinfo(){
-  this.id=this.getuserid();
-    console.log(this.id);
-    this.userdata=this.display(this.id).subscribe((res)=>{
+
+
+  // previousinfo(){
+  // this.id=this.getuserid();
+    // console.log(this.id);
+    // this.display(this.id).subscribe((res)=>{
       // with display method returns success,msg,data
 
-      console.log(res);
-      this.userdata=res;
-      this.userinfo=this.userdata.data;
-      console.log(this.userinfo);
+      // console.log(res);
+      // this.userdata=res;
+      // this.userinfo=this.userdata.data;
+      // console.log(this.userinfo);
 
-     })
-    }
+    //  })
+    // }
 
-
-
-  credentialsdata(){
-  this.displaycredentials(this.getuserid()).subscribe((res)=>{
-    this.credentialdata=res;
-    this.cred=this.credentialdata.data;
-    console.log(this.cred);
-}
-,(err)=>{
-console.log(err);
-
-})
-  }
-
-
-  // questionData(){
-  //   this.displayques(this.getuserid).subscribe((res)=>{
-  //     this.quesresponse=res;
-  //     console.log(res);
-  //     this.que=this.quesresponse.data;
-  //     console.log(this.que[0]._id);
-  //     console.log("question added successfully");
-  //   }
-  //   ,(err)=>{
-  //     console.log(err);
-  //   }
-  //   )
-  // }
 
   public regnew:User={
     firstname:this.userinfo.firstname,
@@ -71,6 +44,7 @@ console.log(err);
     contact:this.userinfo.contact,
     password:'',
     confirmpassword:'',
+
 
   };
 
@@ -99,8 +73,12 @@ public addcred:Addcredentials={
 public answers:Answer={
   answer:'',
   questionid:'',
-  // questionid:this.que[0]._id,
   userid:this.getuserid()
+};
+
+public profileimage:Profile={
+  user:this.getuserid(),
+  image:'',
 };
 
 
@@ -145,14 +123,17 @@ addanswer(answers:Answer){
   return this.http.post('http://localhost:3200/addans',answers);
 };
 
-displayanswer(){
-
+displayanswer(id:any){
+  return this.http.get('http://localhost:3200/displayans/'+id);
 }
 
 updateuser(selected:User){
   return this.http.put(`${'http://localhost:3200/updateRecord'}/${this.getuserid()}`,selected);
 }
 
+userimage(profilepic:Profile){
+  return this.http.post('http://localhost:3200/imageupload',profilepic);
+}
 
 //use localstorage to store token
 setToken(token:string){
@@ -211,12 +192,24 @@ deleteuserid(){
 // }
 
 // getquestionid(){
-//   localStorage.getItem('questionid');
-
+// return localStorage.getItem('questionid');
 // }
 
 // deletequestionid(){
 //   localStorage.removeItem('questionid');
+// }
+
+
+// setcredid(credid:string){
+//   localStorage.setItem('credenid',credid);
+// }
+
+// getcredid(){
+//   return localStorage.getItem('credid');
+// }
+
+// deletecredid(){
+//   localStorage.removeItem('credid');
 // }
 
 }

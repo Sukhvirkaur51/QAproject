@@ -15,7 +15,9 @@ export class QuestionsComponent implements OnInit {
   ngOnInit(): void {
   }
   openDialogue(){
-    const dialogref = this.dialog.open(AddQueComponent)
+    const dialogref = this.dialog.open(AddQueComponent,{
+      height: '600px',
+      width: '750px'});
   }
 
 

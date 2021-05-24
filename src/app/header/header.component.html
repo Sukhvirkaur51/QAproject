@@ -1,5 +1,75 @@
-<header>
+<!-- <header> -->
 
+  <!-- <div *ngIf="this.userserviceobj.isloggedIn()==null; else elseBlock"> -->
+     <!-- Content to render when condition is true. -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a  href="#" class="logo">
+          <!-- <img src="../../assets/assets/img/icon/navicon1.jpg" alt="" width="50" height="40" class="d-inline-block align-text-top"> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto hover1">
+            <li class="nav-item ">
+              <a class="nav-link " aria-current="page" routerLink="/">Home</a>
+            </li>
+            <li class="nav-item ml-3">
+              <a class="nav-link" routerLink="/register">Sign Up</a>
+            </li>
+
+            <!-- <li class="nav-item ml-3">
+              <a class="nav-link" routerLink="/login">Login</a>
+            </li> -->
+            <li class="nav-item ml-3">
+              <a class="nav-link" routerLink="/questions">Question</a>
+            </li>
+            <li class="nav-item ml-3">
+              <a class="nav-link" routerLink="/answers">Answer</a>
+            </li>
+            <li class="nav-item ml-3">
+              <a class="nav-link" routerLink="/">Help</a>
+            </li>
+            <li class="nav-item ml-3">
+              <a class="nav-link" routerLink="/contact">Contact Now</a>
+            </li>
+            <!-- <li class="nav-item ml-1 mr-4">
+              <a class="nav-link" routerLink="/profile">Profile</a>
+            </li> -->
+
+            <button mat-button [matMenuTriggerFor]="menu"><img src="../../assets/assets/img/icon/userimg.jpg" width="28" alt=""></button>
+  <mat-menu #menu="matMenu" class="optionmenu">
+    <button  mat-menu-item class="d-block btn-block"><img src="../../assets/assets/img/icon/userimg.jpg" width="35" alt=""></button>
+    <button mat-menu-item (click)="profileop()" class="btn-block mt-2"><p class="namebtn">{{userinfo.firstname}} {{userinfo.lastname}}<i class="bi bi-arrow-right-circle-fill"></i></p></button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item><i class="bi bi-bookmark"></i>Messages</button>
+    <!-- <button mat-menu-item>Create Ad</button> -->
+     <button mat-menu-item>Your Content</button>
+    <button mat-menu-item><mat-icon>bookmark</mat-icon>Bookmarks</button>
+    <button mat-menu-item><mat-icon>drafts</mat-icon>Drafts</button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item>Languages</button>
+    <button mat-menu-item>help</button>
+    <button mat-menu-item>Logout</button>
+
+  </mat-menu>
+
+          </ul>
+          <form class="d-flex justify-content-end">
+            <input class="form-control  ml-auto ml-3 " type="search" placeholder="Search" aria-label="Search">
+            <!-- <button class="btn butn btncolor ml-2 " type="submit">Search</button> -->
+            <button mat-stroked-button class="ml-2"><mat-icon>search</mat-icon></button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  <!-- </div> -->
+
+
+<ng-template #elseBlock>
+  <!-- Content to render when condition is false. -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a  href="#" class="logo">
@@ -15,6 +85,9 @@
           </li>
           <li class="nav-item ml-3">
             <a class="nav-link" routerLink="/register">Sign Up</a>
+          </li>
+          <li class="nav-item ml-3">
+            <a class="nav-link" routerLink="/addque">Add Questions</a>
           </li>
 
           <!-- <li class="nav-item ml-3">
@@ -32,9 +105,7 @@
           <li class="nav-item ml-3">
             <a class="nav-link" routerLink="/contact">Contact Now</a>
           </li>
-          <!-- <li class="nav-item ml-1 mr-4">
-            <a class="nav-link" routerLink="/profile">Profile</a>
-          </li> -->
+
 
           <button mat-button [matMenuTriggerFor]="menu"><img src="../../assets/assets/img/icon/userimg.jpg" width="28" alt=""></button>
 <mat-menu #menu="matMenu" class="optionmenu">
@@ -63,5 +134,70 @@
       </div>
     </div>
   </nav>
+</ng-template>
 
-</header>
+  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a  href="#" class="logo"> -->
+        <!-- <img src="../../assets/assets/img/icon/navicon1.jpg" alt="" width="50" height="40" class="d-inline-block align-text-top"> -->
+      <!-- </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto hover1">
+          <li class="nav-item ">
+            <a class="nav-link " aria-current="page" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item ml-3">
+            <a class="nav-link" routerLink="/register">Sign Up</a>
+          </li> -->
+
+          <!-- <li class="nav-item ml-3">
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li> -->
+          <!-- <li class="nav-item ml-3">
+            <a class="nav-link" routerLink="/questions">Question</a>
+          </li>
+          <li class="nav-item ml-3">
+            <a class="nav-link" routerLink="/answers">Answer</a>
+          </li>
+          <li class="nav-item ml-3">
+            <a class="nav-link" routerLink="/">Help</a>
+          </li>
+          <li class="nav-item ml-3">
+            <a class="nav-link" routerLink="/contact">Contact Now</a>
+          </li> -->
+          <!-- <li class="nav-item ml-1 mr-4">
+            <a class="nav-link" routerLink="/profile">Profile</a>
+          </li> -->
+
+          <!-- <button mat-button [matMenuTriggerFor]="menu"><img src="../../assets/assets/img/icon/userimg.jpg" width="28" alt=""></button>
+<mat-menu #menu="matMenu" class="optionmenu">
+  <button  mat-menu-item class="d-block btn-block"><img src="../../assets/assets/img/icon/userimg.jpg" width="35" alt=""></button>
+  <button mat-menu-item (click)="profileop()" class="btn-block mt-2"><p class="namebtn">{{userinfo.firstname}} {{userinfo.lastname}}<i class="bi bi-arrow-right-circle-fill"></i></p></button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item><i class="bi bi-bookmark"></i>Messages</button>
+  <button mat-menu-item>Create Ad</button> -->
+  <!-- <button mat-menu-item>Your Content</button>
+  <button mat-menu-item><mat-icon>bookmark</mat-icon>Bookmarks</button>
+  <button mat-menu-item><mat-icon>drafts</mat-icon>Drafts</button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item>Settings</button>
+  <button mat-menu-item>Languages</button>
+  <button mat-menu-item>help</button>
+  <button mat-menu-item>Logout</button>
+
+</mat-menu> -->
+
+        <!-- </ul>
+        <form class="d-flex justify-content-end">
+          <input class="form-control  ml-auto ml-3 " type="search" placeholder="Search" aria-label="Search">
+          <button class="btn butn btncolor ml-2 " type="submit">Search</button> -->
+          <!-- <button mat-stroked-button class="ml-2"><mat-icon>search</mat-icon></button>
+        </form>
+      </div>
+    </div>
+  </nav> -->
+
+<!-- </header> -->

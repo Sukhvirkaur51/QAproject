@@ -17,7 +17,7 @@ var registerSchema=mongoose.Schema({
     },
     contact:{
       type:String,
-      minlength:[10,'inavlid phone number']
+      minlength:[10,'invalid phone number']
     },
     password:{
         type:String,
@@ -26,7 +26,9 @@ var registerSchema=mongoose.Schema({
     },
     saltString:{
       type:String
-  }
+  },
+
+
 });
 
 //encrypt password

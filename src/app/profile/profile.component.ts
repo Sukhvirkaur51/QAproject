@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddQueComponent } from '../add-que/add-que.component';
@@ -14,7 +15,12 @@ import { UserService } from '../shared/user.service';
 export class ProfileComponent implements OnInit {
 
   constructor(public userserviceobj:UserService , public router:Router,private dialog:MatDialog) { }
+
+ count!:0;
+
   id:any;
+  dispid:any;
+
   userdata:any=[];
   userinfo:any=[];
 
@@ -25,18 +31,28 @@ export class ProfileComponent implements OnInit {
   ans:any=[];
 
   credentialdata:any=[];
-  cred:any;
+  cred:any=[];
 
-  ngOnInit(): void {
+  imagedata:any=[];
+  image:any=[];
 
+  ngOnInit(){
 
-  this.id=this.userserviceobj.getuserid();   //get userid and sent with api to get userinfo
+    this.dispid=this.ans.questionid;
+
+  //  console.log(this.count);
+   this.id=this.userserviceobj.getuserid();   //get userid and sent with api to get userinfo
       console.log(this.id);   //gives id of user in normal form
-    this.userdata=this.userserviceobj.display(this.id).subscribe((res)=>{  //with display method returns success,msg,data
+    this.userserviceobj.display(this.id).subscribe((res)=>{  //with display method returns success,msg,data
       this.userdata=res;
       this.userinfo=this.userdata.data;
        console.log(this.userinfo);   //give userinfo on console without success and msg in backend format.
     })
+
+  // this.userserviceobj.display().subscribe((res)=>{
+  //   console.log(res);
+  // })
+  // console.log(this.userserviceobj.previousinfo())
 
     this.userserviceobj.displayques(this.id).subscribe((res)=>{
       this.quesresponse=res;
@@ -49,6 +65,8 @@ export class ProfileComponent implements OnInit {
     }
     )
 
+
+
     this.userserviceobj.displaycredentials(this.id).subscribe((res)=>{
             this.credentialdata=res;
             console.log(res);
@@ -58,13 +76,49 @@ export class ProfileComponent implements OnInit {
     ,(err)=>{
       console.log(err);
 
+    })
+
+
+    this.userserviceobj.displayanswer(this.que._id).subscribe((res)=>{
+      this.answerresponse=res;
+      this.ans=this.answerresponse.data;
+      console.log(this.ans);
     }
+    ,(err)=>{
+      console.log(err);
 
-
+    }
     )
-    // this.userserviceobj.credentialsdata();
+
+}
+
+postans(f:NgForm){
+  console.log(f.value);
+ this.userserviceobj.addanswer(f.value).subscribe((res)=>{
+   this.answerresponse=res;
+   console.log(res);
+   this.ans=this.answerresponse.data;
+   console.log("answer added successfully");
+ }
+ ,(err)=>{
+   console.log(err);
+ })
+}
 
 
+
+onadd(f:NgForm){
+  this.userserviceobj.userimage(f.value).subscribe((res)=>{
+    console.log(f.value);
+    console.log(res);
+    this.imagedata=res;
+    this.image=this.imagedata.data;
+    console.log(this.image);
+    alert('profile picture added successfully');
+  },(err)=>{
+    console.log(err);
+  }
+  )
 }
 
 askque(){

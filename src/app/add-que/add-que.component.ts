@@ -31,8 +31,9 @@ export class AddQueComponent implements OnInit {
   onadd(f:NgForm){
     this.userserviceobj.addques(f.value).subscribe((res)=>{
       console.log(res);
-      // this.router.navigateByUrl('/profile')
+      alert('Question added successfully');
       this.dialog.closeAll();
+       this.router.navigateByUrl('/profile')
 
 
     },(err)=>{

@@ -1,10 +1,10 @@
 require('./config/db');
 const cors=require('cors');
 var routes=require('./routes/userroutes');
-
+var mongoose = require('mongoose');
 var express=require('express');
 var bodyparser=require('body-parser');
-
+mongoose.set('useCreateIndex', true);
 const app=express();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));

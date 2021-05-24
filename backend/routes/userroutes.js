@@ -18,5 +18,7 @@ approute.get('/displayans/:questionid',myctrl.displayanswer); //get answers
 
 approute.put('/updateRecord/:id',myctrl.updatedData);  //for update
 
+approute.post('/imageupload/:user',myctrl.uploadimage);
+
 
 module.exports=approute

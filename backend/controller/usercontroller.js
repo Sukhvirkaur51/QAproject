@@ -1,15 +1,18 @@
 const mongoose=require('mongoose');
+const multer=require('multer');
 
 require('../config/passportconfig')
 require('../model/usermodel');
 require('../model/questionmodel');
 require('../model/addcredmodel');
 require('../model/answermodel');
+require('../model/profilemodel');
 
 var regData=mongoose.model('register');
 var queData=mongoose.model('question');
 var credData=mongoose.model('addcredentials');
 var ansData=mongoose.model('answer');
+var proData=mongoose.model('profilepicture');
 
 const passport = require('passport');
 const jwt=require('jsonwebtoken');
@@ -20,7 +23,13 @@ module.exports.addnew=(req,res)=>{
         lastname:req.body.lastname,
         email:req.body.email,
         password:req.body.password,
-        contact:req.body.contact
+        contact:req.body.contact,
+        // location:req.body.location,
+        // workexperience:req.body.workexperience,
+        // education:req.body.education,
+        // address:req.body.address,
+        // dateofbirth:req.body.dateofbirth,
+        // profile:req.body.profile
     });
     reg.save().then((docs)=>{
         return res.status(200).json({
@@ -158,6 +167,24 @@ module.exports.displaycredentials=(req,res)=>{
 })
 }
 
+// module.exports.displaycredentials=(req,res)=>{
+//   credData.findById({user:req.params.id}).then
+//   ((docs)=>{
+//     console.log(docs);
+//     return res.status(200).json({
+//       success:true,
+//       message:'credentials found',
+//       data:docs
+//     })
+//   }).catch((err)=>{
+//     return res.status(400).json({
+//       success:false,
+//       message:'credentials not found',
+//       error:err.message
+//     })
+//   })
+// }
+
 //add answers
 module.exports.addanswers=(req,res)=>{
   var myanswer=new ansData({
@@ -184,7 +211,7 @@ module.exports.addanswers=(req,res)=>{
 //display answer
 
 module.exports.displayanswer=(req,res)=>{
-  return ansData.find({questionid:req.params.questionid}).populate('questionid').exec().then((docs)=>{
+  return ansData.find({questionid:req.params.questionid},{userid:req.params.userid}).populate('questionid').populate('userid').exec().then((docs)=>{
     return res.status(200).json({
       success:true,
       message:'list of answers',
@@ -220,4 +247,55 @@ module.exports.updatedData=(req,res)=>{
       })
 
 }
+
+//for uploading profilepicture
+
+var storage=multer.diskStorage({
+
+  destination:(req,file,cb)=>{
+    cb(null,'./uploads');
+  },
+  filename:(req,file,cb)=>{
+    cb(null,file.originalname);
+  }
+
+  })
+
+
+
+  var upload=multer({storage:storage}).single('file');
+
+  module.exports.uploadimage=(req,res)=>{
+    upload(req,res,(err)=>{
+      if(err)
+      console.log("error in uploading file" +err);
+
+      else{
+        console.log("file uploading successfully");
+
+        var proimage=new proData({
+          user:req.params.user,
+          image:req.file.path
+        });
+
+        proimage.save().then((docs)=>{
+          return res.status(200).json({
+            success:true,
+            message:"image saved successfully",
+            data:docs
+          })
+        })
+             .catch((err)=>{
+             return res.status(404).json({
+               success:false,
+               message:"error in uploading file",
+               error:err.message
+             })
+             })
+
+             console.log(req.file);
+
+      }
+    })
+  }
 

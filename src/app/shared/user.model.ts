@@ -5,6 +5,12 @@ export class User {
   contact!:string;
   password!:string;
   confirmpassword!:string;
+  // location!: string;
+  // dateofbirth!: string;
+  // profile!: string;
+  // education!: string;
+  // address!: string;
+  // workexperience!: string;
 }
 
 

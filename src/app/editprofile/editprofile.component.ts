@@ -25,8 +25,7 @@ export class EditprofileComponent implements OnInit {
 
     this.id=this.userserviceobj.getuserid();
     console.log(this.id);
-    this.userdata=this.userserviceobj.display(this.id).subscribe((res)=>{
-      // with display method returns success,msg,data
+    this.userdata=this.userserviceobj.display(this.id).subscribe((res)=>{    // with display method returns success,msg,data
 
       console.log(res);
       this.userdata=res;
@@ -42,7 +41,7 @@ export class EditprofileComponent implements OnInit {
 
 
     OnSubmit(f:NgForm){
-      // console.log(f.value);
+       console.log(f.value);
       this.userserviceobj.updateuser(f.value).subscribe((res)=>{
         console.log(res);
         this.edituser=res;

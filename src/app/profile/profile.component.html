@@ -11,16 +11,33 @@
 </head>
 <body>
   <div class="container emp-profile">
-    <form method="post">
+    <form  method="post">
         <div class="row">
             <div class="col-md-4">
+              <form #imageform="ngForm" (ngSubmit)="onadd(imageform)">
                 <div class="profile-img">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                    <img src={{image.image}} alt="profilepicture">
                     <div class="file btn btn-lg btn-primary">
                         Change Photo
-                        <input type="file" name="file"/>
+                        <input type="file" name="file"
+                        #file="ngModel"
+                     [(ngModel)]="userserviceobj.profileimage.image"/>
+                    </div>
+                    <div>
+                      <input
+                      type="hidden"
+                       name="user"
+                       #user="ngModel"
+                       [(ngModel)]="userserviceobj.profileimage.user"
+
+                       >
                     </div>
                 </div>
+                <div>
+                  <button mat-raised-button type="submit">Submit</button>
+                </div>
+              </form>
             </div>
             <div class="col-md-6">
                 <div class="profile-head">
@@ -57,30 +74,11 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <!-- <h3 (click)="addcred()">Add Credentials</h3><br> -->
-                    <button type="submit" (click)="editprofile()" class="rounded" mat-stroked-button>Edit Your profile </button>
-                    <button type="submit" (click)="addcred()" class="mt-3" mat-stroked-button>Add Credentials </button>
+                    <button type="submit" (click)="editprofile()" class="rounded mt-3"  mat-stroked-button>Edit Your profile </button>
+                    <button type="submit" (click)="addcred()"  class="mt-3" mat-stroked-button>Add Credentials </button>
                     <button type="submit" (click)="logout()" class="mt-3" mat-stroked-button>Logout </button>
-                    <!-- <div class="row">
-                      <div class="col-md-6">
-                          <label>Location{{cred.location}}</label>
-                      </div>
-                      <div class="col-md-6">
-                          <p>
-                            </p>
-                      </div>
-                  </div> -->
 
-
-
-                    <!-- <a href="">Website Link</a><br/>
-                    <a href="">Bootsnipp Profile</a><br/>
-                    <a href="">Bootply Profile</a>
-                    <p>SKILLS</p>
-                    <a href="">Web Designer</a><br/>
-                    <a href="">Web Developer</a><br/>
-                    <a href="">WordPress</a><br/>
-                    <a href="">WooCommerce</a><br/>
-                    <a href="">PHP, .Net</a><br/> -->
+                    <!-- [disabled]="(cred.length==1)"  -->
                 </div>
             </div>
             <div class="col-md-8">
@@ -136,7 +134,7 @@
                                       <label>Location</label>
                                   </div>
                                   <div class="col-md-6">
-                                      <!-- <p>{{cred.location}}</p> -->
+                                      <p>{{cred[0].location}}</p>
                                   </div>
                               </div>
                               <div class="row">
@@ -144,7 +142,7 @@
                                     <label>Date Of Birth</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <!-- <p>{{cred.dateofbirth}}</p> -->
+                                    <p>{{cred[0].dateofbirth}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -152,7 +150,7 @@
                                   <label>Address</label>
                               </div>
                               <div class="col-md-6">
-                                  <!-- <p>{{cred.address}}</p> -->
+                                  <p>{{cred[0].address}}</p>
                               </div>
                           </div>
                           <div class="row">
@@ -160,7 +158,7 @@
                                 <label>Profile</label>
                             </div>
                             <div class="col-md-6">
-                                <!-- <p>{{cred.profile}}</p> -->
+                                <p>{{cred[0].profile}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -168,7 +166,7 @@
                               <label>Work Experience</label>
                           </div>
                           <div class="col-md-6">
-                              <!-- <p>{{cred.workexperience}}</p> -->
+                              <p>{{cred[0].workexperience}}</p>
                           </div>
                       </div>
                       <div class="row">
@@ -176,7 +174,7 @@
                             <label>Education</label>
                         </div>
                         <div class="col-md-6">
-                            <!-- <p>{{cred.education}}</p> -->
+                            <p>{{cred[0].education}}</p>
                         </div>
                     </div>
                     </div>
@@ -199,6 +197,7 @@
                             No answer yet .
                           </span>
                           <span class="follow">last active 9m ago</span>
+                          <!-- <div>The Current Count is {{count}}</div> -->
 
 
                           <!--div1.1 -->
@@ -206,7 +205,12 @@
                             <!-- <button class="mt-1" data-toggle="collapse" data-target="#collapseExample"  mat-raised-button><img src="../../assets/assets/img/icon/answer.png" width="20" class="mt-1 mr-1" alt="answer">Answer</button>
                             <button mat-raised-button class="ml-2"><img src="../../assets/assets/img/icon/follow.png" width="20" alt="follow">Follow</button> -->
                              <div class="rightbottom ml-5 mt-2">
-                              <span class="dislike"><a href="#" ><img src="../../assets/assets/img/icon/dislikee.jpg" width="28"  alt="dislike"></a></span>
+                              <span class="dislike"><a href="#" >
+                              <!-- <button type="submit" mat-flat-button ng-click="count = count + 1" ng-init="count=0"> -->
+                                <img src="../../assets/assets/img/icon/dislikee.jpg" width="25"  alt="dislike">
+                              <!-- </button> -->
+                            </a></span>
+
                               <span class="more ml-3"><a href="#"><img src="../../assets/assets/img/icon/more.png" width="30" alt="more"></a></span>
                             </div>
 
@@ -236,13 +240,30 @@
                                       </span>
                                     </div>
                                     <div class="inputans">
+                                      <form #answer="ngForm" (ngSubmit)="postans(answer)">
+
+                                        <input
+                                        type="hidden"
+                                        name="userid"
+                                        #userid="ngModel"
+                                        [(ngModel)]="userserviceobj.answers.userid">
+
+                                        <input
+                                        type="hidden"
+                                        name="questionid"
+                                        #questionid="ngModel"
+                                        [(ngModel)]="que1._id"
+
+                                        >
                                       <mat-form-field class="ansfield">
-                                        <textarea matInput name="answerText" class="answerText"  rows="3" placeholder="Write Answer" ></textarea>
+                                        <textarea matInput name="answer" class="answerText"  rows="3" placeholder="Write Answer"
+                                        #answer="ngModel"
+                        [(ngModel)]="userserviceobj.answers.answer"></textarea>
                                       </mat-form-field>
                                       <button type="submit" class="postbtn" mat-stroked-button >Post</button>
                                       <button type="button" class="draftbtn mt-2" mat-stroked-button >Save Draft</button>
 
-
+                                     </form>
                                     </div>
                                   </div>
                                 </div>
@@ -251,7 +272,6 @@
 
                           </div>
                        </div>
-                       <button class="mt-3 ml-4" mat-raised-button color="primary" (click)="askque()">Ask more Questions</button>
                       </div>
                        <ng-template #noques>
                         <h3>You haven't asked any question yet.</h3>
