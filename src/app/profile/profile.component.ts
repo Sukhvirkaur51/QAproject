@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(){
 
-    this.dispid=this.ans.questionid;
+    // this.dispid=this.que._id;
 
   //  console.log(this.count);
    this.id=this.userserviceobj.getuserid();   //get userid and sent with api to get userinfo
@@ -58,6 +58,7 @@ export class ProfileComponent implements OnInit {
       this.quesresponse=res;
       this.que=this.quesresponse.data;
       console.log(this.que);
+      console.log(this.que[0]._id);
     }
     ,(err)=>{
       console.log(err);
@@ -68,8 +69,9 @@ export class ProfileComponent implements OnInit {
 
 
     this.userserviceobj.displaycredentials(this.id).subscribe((res)=>{
-            this.credentialdata=res;
-            console.log(res);
+      console.log(res)
+           this.credentialdata=res;
+            //console.log(this.credentialdata);
             this.cred=this.credentialdata.data;
             console.log(this.cred);
     }
@@ -78,9 +80,11 @@ export class ProfileComponent implements OnInit {
 
     })
 
+    // console.log(this.dispid);
 
-    this.userserviceobj.displayanswer(this.que._id).subscribe((res)=>{
-      this.answerresponse=res;
+    this.userserviceobj.displayanswer(this.id).subscribe((res)=>{
+      console.log(res)
+    this.answerresponse=res;
       this.ans=this.answerresponse.data;
       console.log(this.ans);
     }
