@@ -49,9 +49,9 @@ export class AddcredentialsComponent implements OnInit {
            this.credentialdata=res;
             this.cred=this.credentialdata.data;
             console.log(this.cred);
-            // this.credid=this.cred._id;
-            // console.log(this.cred._id);
-            // localStorage.setItem('credentialid',this.credid);
+            this.credid=this.cred._id;
+            localStorage.setItem('credentialid',this.credid);
+            console.log(this.credid);
 
 
        this.router.navigateByUrl('/profile')

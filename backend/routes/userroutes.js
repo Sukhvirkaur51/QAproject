@@ -14,9 +14,11 @@ approute.post('/addcred',myctrl.addcredentials);       //add credentials to db
 approute.get('/displaycred/:userid',myctrl.displaycredentials); //get credentials
 
 approute.post('/addans',myctrl.addanswers);       //add answer to db
-approute.get('/displayans/:questionid',myctrl.displayanswer); //get answers
+approute.get('/displayans/:userid',myctrl.displayanswer); //get answers
 
 approute.put('/updateRecord/:id',myctrl.updatedData);  //for update
+approute.put('/updateCredentials/:userid',myctrl.updatedCredentials);  //for update
+
 
 approute.post('/imageupload/:user',myctrl.uploadimage);
 

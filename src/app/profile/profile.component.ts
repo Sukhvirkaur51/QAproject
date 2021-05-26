@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
  count!:0;
 
   id:any;
+  credid:any;
   dispid:any;
 
   userdata:any=[];
@@ -38,6 +39,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(){
 
+
+    this.credid=this.userserviceobj.getcredid();
+    console.log(this.credid);
+
+
     // this.dispid=this.que._id;
 
   //  console.log(this.count);
@@ -49,16 +55,12 @@ export class ProfileComponent implements OnInit {
        console.log(this.userinfo);   //give userinfo on console without success and msg in backend format.
     })
 
-  // this.userserviceobj.display().subscribe((res)=>{
-  //   console.log(res);
-  // })
-  // console.log(this.userserviceobj.previousinfo())
 
     this.userserviceobj.displayques(this.id).subscribe((res)=>{
       this.quesresponse=res;
       this.que=this.quesresponse.data;
       console.log(this.que);
-      console.log(this.que[0]._id);
+      // console.log(this.que[0]._id);
     }
     ,(err)=>{
       console.log(err);
@@ -69,9 +71,9 @@ export class ProfileComponent implements OnInit {
 
 
     this.userserviceobj.displaycredentials(this.id).subscribe((res)=>{
-      console.log(res)
+      // console.log(res)
            this.credentialdata=res;
-            //console.log(this.credentialdata);
+            console.log(this.credentialdata);
             this.cred=this.credentialdata.data;
             console.log(this.cred);
     }
@@ -83,10 +85,12 @@ export class ProfileComponent implements OnInit {
     // console.log(this.dispid);
 
     this.userserviceobj.displayanswer(this.id).subscribe((res)=>{
-      console.log(res)
+      // alert(this.id)
+      console.log(this.id);
     this.answerresponse=res;
       this.ans=this.answerresponse.data;
       console.log(this.ans);
+      // alert(this.ans);
     }
     ,(err)=>{
       console.log(err);
@@ -112,8 +116,9 @@ postans(f:NgForm){
 
 
 onadd(f:NgForm){
+  console.log(f.value);
   this.userserviceobj.userimage(f.value).subscribe((res)=>{
-    console.log(f.value);
+
     console.log(res);
     this.imagedata=res;
     this.image=this.imagedata.data;
@@ -130,9 +135,14 @@ this.dialog.open(AddQueComponent);
 }
 
 addcred(){
+  if(this.cred.length==0){
   const dialogRef= this.dialog.open(AddcredentialsComponent,{
     height: '800px',
     width: '800px'});
+  }
+  else{
+    alert("credentials already added");
+  }
 
 }
 

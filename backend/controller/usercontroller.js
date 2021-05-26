@@ -131,7 +131,7 @@ module.exports.addcredentials=(req,res)=>{
     address:req.body.address,
     profile:req.body.profile,
     workexperience:req.body.workexperience,
-    user:req.body.user
+    userid:req.body.userid
   });
   credentials.save().then((docs)=>{
  return res.status(200).json({
@@ -152,7 +152,7 @@ module.exports.addcredentials=(req,res)=>{
 //display credentials
 
 module.exports.displaycredentials=(req,res)=>{
-  return credData.find({user:req.params.userid}).populate('user').exec().then((docs)=>{
+  return credData.find({userid:req.params.userid}).populate('userid').exec().then((docs)=>{
     return res.status(200).json({
       success:true,
       message:'display credentials',
@@ -211,7 +211,9 @@ module.exports.addanswers=(req,res)=>{
 //display answer
 
 module.exports.displayanswer=(req,res)=>{
-  return ansData.find({questionid:req.params.questionid},{userid:req.params.userid}).populate('questionid').populate('userid').exec().then((docs)=>{
+  return ansData.find(
+  // {questionid:req.params.questionid},
+    {userid:req.params.userid}).populate('questionid').populate('userid').exec().then((docs)=>{
     return res.status(200).json({
       success:true,
       message:'list of answers',
@@ -242,6 +244,28 @@ module.exports.updatedData=(req,res)=>{
           return res.status(401).json({
               success:false,
               message:"error in updating data",
+              error:err.message
+          })
+      })
+
+}
+
+//update credentials by id
+module.exports.updatedCredentials=(req,res)=>{
+
+  var updatedCred=req.body;
+
+  credData.findByIdAndUpdate({userid:req.params.userid},{$set:updatedCred},{new:true})
+  .then((docs)=>{
+      return res.status(200).json({
+          success:true,
+          message:'Credentials updated',
+          data:docs
+      })  })
+      .catch((err)=>{
+          return res.status(401).json({
+              success:false,
+              message:"error in updating credentials",
               error:err.message
           })
       })

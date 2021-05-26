@@ -67,7 +67,7 @@ public addcred:Addcredentials={
   dateofbirth:this.cred.dateofbirth,
   workexperience:this.cred.workexperience,
   address:this.cred.address,
-  user:this.getuserid()
+  userid:this.getuserid()
 };
 
 public answers:Answer={
@@ -124,7 +124,8 @@ addanswer(answers:Answer){
 };
 
 displayanswer(id:any){
-  return this.http.get('http://localhost:3200/displayans/'+id);
+  // return this.http.get('http://localhost:3200/displayans/'+id);
+  return this.http.get('http://localhost:3200/displayans/609cbbe9c3122255c4899ca4');
 }
 
 updateuser(selected:User){
@@ -200,16 +201,16 @@ deleteuserid(){
 // }
 
 
-// setcredid(credid:string){
-//   localStorage.setItem('credenid',credid);
-// }
+setcredid(credid:string){
+  localStorage.setItem('credenid',credid);
+}
 
-// getcredid(){
-//   return localStorage.getItem('credid');
-// }
+getcredid(){
+  return localStorage.getItem('credid');
+}
 
-// deletecredid(){
-//   localStorage.removeItem('credid');
-// }
+deletecredid(){
+  localStorage.removeItem('credid');
+}
 
 }
