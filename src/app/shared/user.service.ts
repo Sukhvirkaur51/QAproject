@@ -57,7 +57,7 @@ id:any;
     question:'',
     category:'',
     about:'',
-    user:this.getuserid()
+    userid:this.getuserid()
   };
 
 public addcred:Addcredentials={
@@ -77,7 +77,7 @@ public answers:Answer={
 };
 
 public profileimage:Profile={
-  user:this.getuserid(),
+  userid:this.getuserid(),
   image:'',
 };
 
@@ -124,12 +124,16 @@ addanswer(answers:Answer){
 };
 
 displayanswer(id:any){
-  // return this.http.get('http://localhost:3200/displayans/'+id);
-  return this.http.get('http://localhost:3200/displayans/609cbbe9c3122255c4899ca4');
+  return this.http.get('http://localhost:3200/displayans/'+id);
+ // return this.http.get('http://localhost:3200/displayans/609cbbe9c3122255c4899ca4');
 }
 
 updateuser(selected:User){
   return this.http.put(`${'http://localhost:3200/updateRecord'}/${this.getuserid()}`,selected);
+}
+
+updatecredentials(selectedcred:Addcredentials){
+  return this.http.put(`${'http://localhost:3200/updateCredentials'}/${this.getuserid()}`,selectedcred);
 }
 
 userimage(profilepic:Profile){
@@ -187,30 +191,5 @@ deleteuserid(){
   localStorage.removeItem('userid');
 }
 
-
-// setquestionid(id:any){
-//   localStorage.setItem('questionid',id);
-// }
-
-// getquestionid(){
-// return localStorage.getItem('questionid');
-// }
-
-// deletequestionid(){
-//   localStorage.removeItem('questionid');
-// }
-
-
-setcredid(credid:string){
-  localStorage.setItem('credenid',credid);
-}
-
-getcredid(){
-  return localStorage.getItem('credid');
-}
-
-deletecredid(){
-  localStorage.removeItem('credid');
-}
 
 }

@@ -1,5 +1,5 @@
 export class Profile {
-user!:any;
+userid!:any;
 image!:any;
 
 

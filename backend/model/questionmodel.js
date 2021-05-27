@@ -14,7 +14,7 @@ var questionSchema=mongoose.Schema({
     type:Date,
     default:Date.now()
   },
-  user:{
+  userid:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'register'
   }

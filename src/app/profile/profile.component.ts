@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { AddQueComponent } from '../add-que/add-que.component';
 import { AddcredentialsComponent } from '../addcredentials/addcredentials.component';
+import { AnswersComponent } from '../answers/answers.component';
+import { EditCredentialsComponent } from '../edit-credentials/edit-credentials.component';
 import { EditprofileComponent } from '../editprofile/editprofile.component';
 import { UserService } from '../shared/user.service';
 
@@ -19,8 +22,6 @@ export class ProfileComponent implements OnInit {
  count!:0;
 
   id:any;
-  credid:any;
-  dispid:any;
 
   userdata:any=[];
   userinfo:any=[];
@@ -30,6 +31,7 @@ export class ProfileComponent implements OnInit {
 
   answerresponse:any=[];
   ans:any=[];
+  question:any=[];
 
   credentialdata:any=[];
   cred:any=[];
@@ -40,15 +42,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(){
 
 
-    this.credid=this.userserviceobj.getcredid();
-    console.log(this.credid);
-
-
-    // this.dispid=this.que._id;
-
   //  console.log(this.count);
    this.id=this.userserviceobj.getuserid();   //get userid and sent with api to get userinfo
-      console.log(this.id);   //gives id of user in normal form
+      console.log(this.id);                   //gives id of user in normal form
     this.userserviceobj.display(this.id).subscribe((res)=>{  //with display method returns success,msg,data
       this.userdata=res;
       this.userinfo=this.userdata.data;
@@ -82,15 +78,14 @@ export class ProfileComponent implements OnInit {
 
     })
 
-    // console.log(this.dispid);
+
 
     this.userserviceobj.displayanswer(this.id).subscribe((res)=>{
-      // alert(this.id)
       console.log(this.id);
     this.answerresponse=res;
       this.ans=this.answerresponse.data;
       console.log(this.ans);
-      // alert(this.ans);
+
     }
     ,(err)=>{
       console.log(err);
@@ -131,7 +126,15 @@ onadd(f:NgForm){
 }
 
 askque(){
-this.dialog.open(AddQueComponent);
+this.dialog.open(AddQueComponent ,{
+  height: '800px',
+  width: '800px'});
+}
+
+giveans(){
+  this.dialog.open(AnswersComponent ,{
+    height: '800px',
+    width: '950px'});
 }
 
 addcred(){
@@ -144,6 +147,12 @@ addcred(){
     alert("credentials already added");
   }
 
+}
+
+editcred(){
+  const dialogRef= this.dialog.open(EditCredentialsComponent,{
+    height: '800px',
+    width: '800px'});
 }
 
  logout(){

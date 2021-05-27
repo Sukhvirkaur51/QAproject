@@ -20,7 +20,7 @@ export class AddQueComponent implements OnInit {
   ngOnInit(): void {
 
     this.id=this.userserviceobj.getuserid();   //get userid and sent with api to get userinfo
-      console.log(this.id);   //gives id of user in normal form
+      console.log(this.id);                   //gives id of user in normal form
     this.userdata=this.userserviceobj.display(this.id).subscribe((res)=>{  //with display method returns success,msg,data
       this.userdata=res;
       this.userinfo=this.userdata.data;

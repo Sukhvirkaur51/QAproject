@@ -45,6 +45,7 @@ import { CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AddcredentialsComponent } from './addcredentials/addcredentials.component';
+import { EditCredentialsComponent } from './edit-credentials/edit-credentials.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { AddcredentialsComponent } from './addcredentials/addcredentials.compone
     EditprofileComponent,
     LogoutComponent,
     AddcredentialsComponent,
+    EditCredentialsComponent,
 
   ],
   imports: [

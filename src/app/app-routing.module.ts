@@ -4,6 +4,7 @@ import { AddQueComponent } from './add-que/add-que.component';
 import { AddcredentialsComponent } from './addcredentials/addcredentials.component';
 import { AnswersComponent } from './answers/answers.component';
 import { ContactNowComponent } from './contact-now/contact-now.component';
+import { EditCredentialsComponent } from './edit-credentials/edit-credentials.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path:'addcredentials',
     component:AddcredentialsComponent
+  },
+  {
+    path:'editcredentials',
+    component:EditCredentialsComponent
   }
 ];
 

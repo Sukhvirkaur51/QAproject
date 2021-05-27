@@ -16,7 +16,7 @@ export class QuestionsComponent implements OnInit {
   }
   openDialogue(){
     const dialogref = this.dialog.open(AddQueComponent,{
-      height: '600px',
+      height:'600px',
       width: '750px'});
   }
 

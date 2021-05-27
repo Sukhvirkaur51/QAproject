@@ -14,7 +14,6 @@ export class AddcredentialsComponent implements OnInit {
   constructor(public userserviceobj:UserService ,public router:Router,private dialog:MatDialog) { }
 
   id:any;
-  credid:any;
   credentialdata:any=[];
   cred:any=[];
 
@@ -27,20 +26,6 @@ export class AddcredentialsComponent implements OnInit {
 
   }
 
-  // submitcred(f:NgForm){
-  //   console.log(f.value);
-  //   this.userserviceobj.register(f.value).subscribe((res)=>{
-  //     console.log(res);
-  //     alert('Credentials added Successfully');
-  //     this.dialog.closeAll();
-
-  //   },(err)=>{
-  //     console.log(err);
-  //   }
-  //   )
-
-  // }
-
 
 
   submitcred(f:NgForm){
@@ -49,9 +34,6 @@ export class AddcredentialsComponent implements OnInit {
            this.credentialdata=res;
             this.cred=this.credentialdata.data;
             console.log(this.cred);
-            this.credid=this.cred._id;
-            localStorage.setItem('credentialid',this.credid);
-            console.log(this.credid);
 
 
        this.router.navigateByUrl('/profile')

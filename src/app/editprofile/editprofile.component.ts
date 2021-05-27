@@ -11,13 +11,14 @@ import { UserService } from '../shared/user.service';
 })
 export class EditprofileComponent implements OnInit {
 
-  selected!:User;
+
   id:any;
   userdata:any=[];
   userinfo:any=[];
+
   edituser:any=[];
   edit:any=[];
-  updateform!:NgForm;
+
 
   constructor(public userserviceobj:UserService, private dialog:MatDialog) { }
 

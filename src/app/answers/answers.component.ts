@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../shared/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from '../shared/user.service';
 })
 export class AnswersComponent implements OnInit {
 
-  constructor(public userserviceobj:UserService) { }
+  constructor(public userserviceobj:UserService,private dialog:MatDialog) { }
 
   id!:any;
   queid!:any;
@@ -27,10 +28,6 @@ export class AnswersComponent implements OnInit {
 
     this.id=this.userserviceobj.getuserid();   //get userid and sent with api to get userinfo
     console.log(this.id);      //gives id of user in normal form
-
-
-    // this.queid=this.userserviceobj.getquestionid();
-    //  console.log(this.queid);
 
 
   this.userserviceobj.display(this.id).subscribe((res)=>{  //with display method returns success,msg,data
@@ -58,14 +55,16 @@ export class AnswersComponent implements OnInit {
     this.ansresponse=res;
     console.log(res);
     this.ans=this.ansresponse.data;
-    console.log("answer added successfully");
+    alert("answer added successfully");
   }
   ,(err)=>{
     console.log(err);
   })
 }
 
-
+close(){
+  this.dialog.closeAll();
+}
 
 
 

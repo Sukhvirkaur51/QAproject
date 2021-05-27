@@ -24,12 +24,7 @@ module.exports.addnew=(req,res)=>{
         email:req.body.email,
         password:req.body.password,
         contact:req.body.contact,
-        // location:req.body.location,
-        // workexperience:req.body.workexperience,
-        // education:req.body.education,
-        // address:req.body.address,
-        // dateofbirth:req.body.dateofbirth,
-        // profile:req.body.profile
+
     });
     reg.save().then((docs)=>{
         return res.status(200).json({
@@ -86,7 +81,7 @@ module.exports.addquestions=(req,res)=>{
     question:req.body.question,
     category:req.body.category,
     about:req.body.about,
-    user:req.body.user
+    userid:req.body.userid
   });
   myquestion.save().then((docs)=>{
  return res.status(200).json({
@@ -107,7 +102,7 @@ module.exports.addquestions=(req,res)=>{
 //display questions
 
 module.exports.displayquestion=(req,res)=>{
-  return queData.find({user:req.params.userid}).populate('user').exec().then((docs)=>{
+  return queData.find({userid:req.params.userid}).populate('userid').exec().then((docs)=>{
     return res.status(200).json({
       success:true,
       message:'list of questions',
@@ -255,8 +250,9 @@ module.exports.updatedCredentials=(req,res)=>{
 
   var updatedCred=req.body;
 
-  credData.findByIdAndUpdate({userid:req.params.userid},{$set:updatedCred},{new:true})
+  credData.findOneAndUpdate({userid:req.params.userid},{$set:updatedCred},{new:true})
   .then((docs)=>{
+
       return res.status(200).json({
           success:true,
           message:'Credentials updated',
@@ -298,7 +294,7 @@ var storage=multer.diskStorage({
         console.log("file uploading successfully");
 
         var proimage=new proData({
-          user:req.params.user,
+          userid:req.params.userid,
           image:req.file.path
         });
 

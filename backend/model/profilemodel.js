@@ -4,7 +4,7 @@ const mongoose=require('mongoose');
 
 var profileSchema=mongoose.Schema({
 
-  user:{
+  userid:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'register'
   },
