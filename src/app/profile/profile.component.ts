@@ -86,6 +86,8 @@ export class ProfileComponent implements OnInit {
       this.ans=this.answerresponse.data;
       console.log(this.ans);
 
+   //alert(JSON.stringify(this.ans))
+
     }
     ,(err)=>{
       console.log(err);
@@ -114,10 +116,10 @@ onadd(f:NgForm){
   console.log(f.value);
   this.userserviceobj.userimage(f.value).subscribe((res)=>{
 
-    console.log(res);
+    // console.log(res);
     this.imagedata=res;
     this.image=this.imagedata.data;
-    console.log(this.image);
+    // console.log(this.image);
     alert('profile picture added successfully');
   },(err)=>{
     console.log(err);

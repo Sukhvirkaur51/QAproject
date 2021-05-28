@@ -58,6 +58,4 @@ export class EditCredentialsComponent implements OnInit {
   close(){
     this.dialog.closeAll();
   }
-
-
 }

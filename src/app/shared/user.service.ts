@@ -105,10 +105,15 @@ addques(question:Question){
 
 }
 
-//display question of user
+//display question of  single user
 
 displayques(id:any){
   return this.http.get('http://localhost:3200/displayques/'+id);
+}
+
+//display questions of all users
+displayallques(){
+  return this.http.get('http://localhost:3200/displayallques');
 }
 
 addcredentials(credentials:Addcredentials){

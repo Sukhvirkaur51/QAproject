@@ -8,7 +8,8 @@ approute.post('/auth',myctrl.authenticate);   //  post email and password ....it
 approute.get('/userinfo/:id',myctrl.selecteduser);   //get user details
 
 approute.post('/addques',myctrl.addquestions);       //add question to db
-approute.get('/displayques/:userid',myctrl.displayquestion); //get questions
+approute.get('/displayques/:userid',myctrl.displayquestion); //get single user questions
+approute.get('/displayallques',myctrl.allquestion); //get all questions
 
 approute.post('/addcred',myctrl.addcredentials);       //add credentials to db
 approute.get('/displaycred/:userid',myctrl.displaycredentials); //get credentials

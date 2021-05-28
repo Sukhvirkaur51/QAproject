@@ -29,15 +29,14 @@
                       type="hidden"
                        name="userid"
                        #userid="ngModel"
-                       [(ngModel)]="userserviceobj.profileimage.userid"
-
-                       >
-                    </div>
-                    <!-- <button mat-stroked-button  class="ml-3" type="submit">Update picture</button> -->
+                       [(ngModel)]="userserviceobj.profileimage.userid">
+                       <!-- <button mat-raised-button>Update</button> -->
+                       <!-- <input type="submit" placeholder="Update Picture"> -->
+                      </div>
+                      <!-- <button mat-stroked-button>Update Picture</button> -->
+                    <button mat-raised-button  class="ml-3" type="submit">Update picture</button>
                 </div>
-                 <div>
-                  <button class="ml-5" mat-stroked-button type="submit">Update picture</button>
-                </div>
+                  <!-- <button class="ml-5" mat-stroked-button type="submit">Update picture</button> -->
               </form>
             </div>
             <div class="col-md-6">
@@ -75,7 +74,6 @@
                     <button type="submit" (click)="addcred()"  class="mt-3 ml-2" mat-stroked-button>Add Credentials </button>
                     <button type="submit" (click)="editcred()"  class="mt-3 ml-2" mat-stroked-button>Edit Credentials </button>
                     <button type="submit" (click)="logout()" class="mt-3 ml-2" mat-stroked-button>Logout </button>
-
                 </div>
             </div>
             <div class="col-md-8">
@@ -286,17 +284,17 @@
                     <div class="tab-pane fade" id="answer" role="tabpanel" aria-labelledby="answer-tab">
 
                       <div *ngIf="ans.length; else noans">
-                       <div *ngFor="let que1 of que">
-                      <div *ngFor="let ans1 of ans">
+                       <div *ngFor="let ans1 of ans">
 
-                        <!-- <h3>{{ans1.answer}}</h3> -->
+                       <div>
+                       <div >
                         <div class="question mt-3">
-                          <a href="#"> {{que1.question}}
+                       <a href="#">
                             <!-- Why does my JavaScript code receive a "No 'Access-Control-Allow-Origin' header is present on? -->
                           </a>
                        </div>
                        <div class="info">
-                         {{ans1.answer}}
+                          {{ans1.answer}}
                         <!-- Mod note: This question is about why Postman is not subject to CORS restrictions in the same way an XMLHttpRequest is. … I know that the API or remote resource must set the header, but why did it work when I made the request via the Chrome extension Postman? -->
                        </div>
                        <div class="bottom">
@@ -308,13 +306,13 @@
                     </div>
                   </div>
                   </div>
-
+                </div>
                   <ng-template #noans>
                     <h3>You haven't answer any question yet.</h3>
                     <button class="mt-3 ml-4" mat-raised-button color="primary" (click)="giveans()">Give Answer</button>
                   </ng-template>
+                </div>
 
-                  </div>
 
                     <div class="tab-pane fade" id="follower" role="tabpanel" aria-labelledby="follower-tab">
 

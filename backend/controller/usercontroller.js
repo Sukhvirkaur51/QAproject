@@ -99,13 +99,32 @@ module.exports.addquestions=(req,res)=>{
 })
 }
 
-//display questions
+//display questions of single user
 
 module.exports.displayquestion=(req,res)=>{
   return queData.find({userid:req.params.userid}).populate('userid').exec().then((docs)=>{
     return res.status(200).json({
       success:true,
       message:'list of questions',
+      data:docs
+  })
+}).catch((err)=>{
+  return res.status(400).json({
+    success:false,
+    message:'error in displaying',
+    error:err.message
+})
+})
+}
+
+//display questions of all users
+
+var _id = mongoose.Types.ObjectId();
+module.exports.allquestion=(req,res)=>{
+  return queData.find({},{question:1, _id, userid:1}).then((docs)=>{
+    return res.status(200).json({
+      success:true,
+      message:'list of all questions',
       data:docs
   })
 }).catch((err)=>{
@@ -162,23 +181,6 @@ module.exports.displaycredentials=(req,res)=>{
 })
 }
 
-// module.exports.displaycredentials=(req,res)=>{
-//   credData.findById({user:req.params.id}).then
-//   ((docs)=>{
-//     console.log(docs);
-//     return res.status(200).json({
-//       success:true,
-//       message:'credentials found',
-//       data:docs
-//     })
-//   }).catch((err)=>{
-//     return res.status(400).json({
-//       success:false,
-//       message:'credentials not found',
-//       error:err.message
-//     })
-//   })
-// }
 
 //add answers
 module.exports.addanswers=(req,res)=>{
@@ -245,7 +247,7 @@ module.exports.updatedData=(req,res)=>{
 
 }
 
-//update credentials by id
+//update credentials by userid
 module.exports.updatedCredentials=(req,res)=>{
 
   var updatedCred=req.body;

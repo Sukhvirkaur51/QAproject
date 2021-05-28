@@ -47,6 +47,17 @@ export class AnswersComponent implements OnInit {
     console.log(err);
   }
   )
+
+// this.userserviceobj.displayallques().subscribe((res)=>{
+//     this.quesresponse=res;
+//     // console.log(res);
+//     this.que=this.quesresponse.data;
+//     console.log(this.que);
+//     },(err)=>{
+//       console.log(err);
+//     })
+
+
 }
 
   postans(f:NgForm){
