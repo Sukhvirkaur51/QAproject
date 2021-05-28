@@ -35,7 +35,7 @@ export class AddcredentialsComponent implements OnInit {
             this.cred=this.credentialdata.data;
             console.log(this.cred);
 
-
+       location.reload();
        this.router.navigateByUrl('/profile')
       this.dialog.closeAll();
 

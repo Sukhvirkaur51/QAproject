@@ -285,11 +285,10 @@
 
                       <div *ngIf="ans.length; else noans">
                        <div *ngFor="let ans1 of ans">
-
-                       <div>
                        <div >
                         <div class="question mt-3">
                        <a href="#">
+                            {{ans1.questionid.question}}
                             <!-- Why does my JavaScript code receive a "No 'Access-Control-Allow-Origin' header is present on? -->
                           </a>
                        </div>
@@ -304,7 +303,7 @@
                          </div>
 
                     </div>
-                  </div>
+
                   </div>
                 </div>
                   <ng-template #noans>
