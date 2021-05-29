@@ -121,10 +121,29 @@ module.exports.displayquestion=(req,res)=>{
 
 var _id = mongoose.Types.ObjectId();
 module.exports.allquestion=(req,res)=>{
-  return queData.find({},{question:1, _id, userid:1}).then((docs)=>{
+  return queData.find({},{_id:1, userid:1}).populate('_id').populate('userid').then((docs)=>{
     return res.status(200).json({
       success:true,
       message:'list of all questions',
+      data:docs
+  })
+}).catch((err)=>{
+  return res.status(400).json({
+    success:false,
+    message:'error in displaying',
+    error:err.message
+})
+})
+}
+
+//display answers of all users
+
+var _id = mongoose.Types.ObjectId();
+module.exports.allanswers=(req,res)=>{
+  return ansData.find({},{_id:1, userid:1,questionid:1}).populate('_id').populate('questionid').populate('userid').exec().then((docs)=>{
+    return res.status(200).json({
+      success:true,
+      message:'list of all users answers',
       data:docs
   })
 }).catch((err)=>{

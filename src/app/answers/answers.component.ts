@@ -36,26 +36,26 @@ export class AnswersComponent implements OnInit {
      console.log(this.userinfo);   //give userinfo on console without success and msg in backend format.
   })
 
-  this.userserviceobj.displayques(this.id).subscribe((res)=>{
+  // this.userserviceobj.displayques(this.id).subscribe((res)=>{
 
+  //   this.quesresponse=res;
+  //   console.log(res);
+  //   this.que=this.quesresponse.data;
+  //   console.log("question added successfully");
+  // }
+  // ,(err)=>{
+  //   console.log(err);
+  // }
+  // )
+
+this.userserviceobj.displayallques().subscribe((res)=>{
     this.quesresponse=res;
-    console.log(res);
+    // console.log(res);
     this.que=this.quesresponse.data;
-    console.log("question added successfully");
-  }
-  ,(err)=>{
-    console.log(err);
-  }
-  )
-
-// this.userserviceobj.displayallques().subscribe((res)=>{
-//     this.quesresponse=res;
-//     // console.log(res);
-//     this.que=this.quesresponse.data;
-//     console.log(this.que);
-//     },(err)=>{
-//       console.log(err);
-//     })
+    console.log(this.que);
+    },(err)=>{
+      console.log(err);
+    })
 
 
 }

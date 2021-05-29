@@ -31,7 +31,10 @@ export class ProfileComponent implements OnInit {
 
   answerresponse:any=[];
   ans:any=[];
-  question:any=[];
+  // question:any=[];
+
+  answerresponse1:any=[];
+  ans1:any=[];
 
   credentialdata:any=[];
   cred:any=[];
@@ -56,7 +59,7 @@ export class ProfileComponent implements OnInit {
       this.quesresponse=res;
       this.que=this.quesresponse.data;
       console.log(this.que);
-      // console.log(this.que[0]._id);
+
     }
     ,(err)=>{
       console.log(err);
@@ -100,10 +103,11 @@ export class ProfileComponent implements OnInit {
 postans(f:NgForm){
   console.log(f.value);
  this.userserviceobj.addanswer(f.value).subscribe((res)=>{
-   this.answerresponse=res;
+   this.answerresponse1=res;
    console.log(res);
-   this.ans=this.answerresponse.data;
-   console.log("answer added successfully");
+   this.ans1=this.answerresponse1.data;
+   location.reload();
+   alert("answer added successfully");
  }
  ,(err)=>{
    console.log(err);

@@ -33,6 +33,7 @@ export class AddQueComponent implements OnInit {
       console.log(res);
       alert('Question added successfully');
       this.dialog.closeAll();
+      location.reload();
        this.router.navigateByUrl('/profile')
 
 

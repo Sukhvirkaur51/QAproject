@@ -130,7 +130,11 @@ addanswer(answers:Answer){
 
 displayanswer(id:any){
   return this.http.get('http://localhost:3200/displayans/'+id);
- // return this.http.get('http://localhost:3200/displayans/609cbbe9c3122255c4899ca4');
+//  return this.http.get('http://localhost:3200/displayans/60a51dde93004a54700869cb');
+}
+
+displayallans(){
+  return this.http.get('http://localhost:3200/displayallans');
 }
 
 updateuser(selected:User){

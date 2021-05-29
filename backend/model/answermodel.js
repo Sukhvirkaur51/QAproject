@@ -7,12 +7,6 @@ var answerSchema=mongoose.Schema({
     type:String,
   },
 
-  // question:{
-  //   type:mongoose.Schema.Types.ObjectId,
-  //   ref:'question'
-
-  // },
-
   questionid:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'question'
