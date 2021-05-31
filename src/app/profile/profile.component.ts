@@ -106,7 +106,7 @@ postans(f:NgForm){
    this.answerresponse1=res;
    console.log(res);
    this.ans1=this.answerresponse1.data;
-   location.reload();
+  //  location.reload();
    alert("answer added successfully");
  }
  ,(err)=>{

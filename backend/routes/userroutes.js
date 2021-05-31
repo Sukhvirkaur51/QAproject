@@ -13,6 +13,8 @@ approute.get('/displayallques',myctrl.allquestion); //get all questions
 
 approute.post('/addcred',myctrl.addcredentials);       //add credentials to db
 approute.get('/displaycred/:userid',myctrl.displaycredentials); //get credentials
+// approute.get('/displayallcred',myctrl.allcredentials); //get all credentials
+
 
 approute.post('/addans',myctrl.addanswers);       //add answer to db
 approute.get('/displayans/:userid',myctrl.displayanswer); //get answers

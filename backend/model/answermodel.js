@@ -15,6 +15,15 @@ var answerSchema=mongoose.Schema({
   userid:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'register'
+  },
+
+  credentialid:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'addcredentials'
+  },
+  date:{
+    type:Date,
+    default:Date.now()
   }
 
 

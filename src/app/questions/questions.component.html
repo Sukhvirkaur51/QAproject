@@ -68,8 +68,10 @@
            <span class="username"><img src="../../assets/assets/img/icon/userimg.jpg" width="30"  alt="userimg"> {{ans1.userid.firstname}}</span>
            <span class="follow ml-2"><a href="#">Follow</a></span>
            <span class="close mt-2"><a href="#"><img src="../../assets/svg(s)//Closesvg.png" alt=""></a></span><br>
-           <span class="follow mt-0">Lives in Rajasthan,India.</span>
-           <span class="follow">February 15</span>
+           <span class="follow mt-0"> Lives in
+             {{ans1.credentialid.address}}
+            </span>
+           <span class="follow">{{ans1._id.date}}</span>
            <div class="question mt-3">
               <a href="#">
                 {{ans1.questionid.question}}
@@ -122,8 +124,15 @@
                         name="questionid"
                         #questionid="ngModel"
                         [(ngModel)]="ans1.questionid._id"
-
                         >
+
+                        <!-- <input
+                        type="hidden"
+                        name="credentialid"
+                        #credentialid="ngModel"
+                        [(ngModel)]="ans1.credentialid._id"
+                        > -->
+
                       <mat-form-field class="ansfield">
                         <textarea matInput name="answer" class="answerText"  rows="3" placeholder="Write Answer"
                         #answer="ngModel"
@@ -157,7 +166,7 @@
          </div>
          <div class="container-fluid Heading shadow-sm bg-body rounded btndiv">
            <!-- <tr><a routerLink="/addque">Ask a Question</a> -->
-           <button mat-button  class="btn-block">Ask a question</button>
+           <button mat-button  class="btn-block" (click)="askque()">Ask a question</button>
 
          </div>
          <div class="container-fluid Heading shadow-sm bg-body rounded btndiv">

@@ -73,7 +73,9 @@ public addcred:Addcredentials={
 public answers:Answer={
   answer:'',
   questionid:'',
-  userid:this.getuserid()
+  userid:this.getuserid(),
+  credentialid:'',
+  date:''
 };
 
 public profileimage:Profile={
@@ -96,13 +98,13 @@ public profileimage:Profile={
  // to display selected user content
 display(id:any){
   return this.http.get('http://localhost:3200/userinfo/'+id);   //returns success message and data
-
 }
+
+
 
 //add new questions
 addques(question:Question){
   return this.http.post('http://localhost:3200/addques',question);
-
 }
 
 //display question of  single user
@@ -116,6 +118,9 @@ displayallques(){
   return this.http.get('http://localhost:3200/displayallques');
 }
 
+
+
+
 addcredentials(credentials:Addcredentials){
   return this.http.post('http://localhost:3200/addcred', credentials);
 }
@@ -123,6 +128,13 @@ addcredentials(credentials:Addcredentials){
 displaycredentials(id:any){
   return this.http.get('http://localhost:3200/displaycred/'+id);
 }
+
+// displayallcred(){
+//   return this.http.get('http://localhost:3200/displayallcred');
+// }
+
+
+
 
 addanswer(answers:Answer){
   return this.http.post('http://localhost:3200/addans',answers);
@@ -137,6 +149,9 @@ displayallans(){
   return this.http.get('http://localhost:3200/displayallans');
 }
 
+
+
+
 updateuser(selected:User){
   return this.http.put(`${'http://localhost:3200/updateRecord'}/${this.getuserid()}`,selected);
 }
@@ -145,9 +160,14 @@ updatecredentials(selectedcred:Addcredentials){
   return this.http.put(`${'http://localhost:3200/updateCredentials'}/${this.getuserid()}`,selectedcred);
 }
 
+
+
 userimage(profilepic:Profile){
   return this.http.post('http://localhost:3200/imageupload',profilepic);
 }
+
+
+
 
 //use localstorage to store token
 setToken(token:string){

@@ -78,6 +78,7 @@
             </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
+                  <!-- <div *ngFor="let cred1 of cred"> -->
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -238,6 +239,7 @@
                                       </span>
                                     </div>
                                     <div class="inputans">
+                                      <div *ngFor="let cred1 of cred">
                                       <form #answer="ngForm" (ngSubmit)="postans(answer)">
 
                                         <input
@@ -251,8 +253,16 @@
                                         name="questionid"
                                         #questionid="ngModel"
                                         [(ngModel)]="que1._id"
+                                         >
 
-                                        >
+                                         <input
+                                        type="hidden"
+                                        name="credentialid"
+                                        #credentialid="ngModel"
+                                        [(ngModel)]="cred1._id"
+                                         >
+
+
                                       <mat-form-field class="ansfield">
                                         <textarea matInput name="answer" class="answerText"  rows="3" placeholder="Write Answer"
                                         #answer="ngModel"
@@ -262,6 +272,7 @@
                                       <button type="button" class="draftbtn mt-2" mat-stroked-button >Save Draft</button>
 
                                      </form>
+                                    </div>
                                     </div>
                                   </div>
                                 </div>
@@ -319,8 +330,9 @@
 
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
+        <!-- </div> -->
     </form>
 </div>
 

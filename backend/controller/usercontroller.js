@@ -140,7 +140,8 @@ module.exports.allquestion=(req,res)=>{
 
 var _id = mongoose.Types.ObjectId();
 module.exports.allanswers=(req,res)=>{
-  return ansData.find({},{_id:1, userid:1,questionid:1}).populate('_id').populate('questionid').populate('userid').exec().then((docs)=>{
+  return ansData.find({},{_id:1, userid:1,questionid:1, credentialid:1, date:1}).populate('_id')
+  .populate('questionid').populate('userid').populate('credentialid').exec().then((docs)=>{
     return res.status(200).json({
       success:true,
       message:'list of all users answers',
@@ -201,12 +202,32 @@ module.exports.displaycredentials=(req,res)=>{
 }
 
 
+//display credentials of all users
+
+// var _id = mongoose.Types.ObjectId();
+// module.exports.allcredentials=(req,res)=>{
+//   return credData.find({},{_id:1, userid:1}).populate('_id').populate('userid').exec().then((docs)=>{
+//     return res.status(200).json({
+//       success:true,
+//       message:'list of all users credentials',
+//       data:docs
+//   })
+// }).catch((err)=>{
+//   return res.status(400).json({
+//     success:false,
+//     message:'error in displaying',
+//     error:err.message
+// })
+// })
+// }
+
 //add answers
 module.exports.addanswers=(req,res)=>{
   var myanswer=new ansData({
     answer:req.body.answer,
     questionid:req.body.questionid,
-    userid:req.body.userid
+    userid:req.body.userid,
+    credentialid:req.body.credentialid
   });
   myanswer.save().then((docs)=>{
  return res.status(200).json({

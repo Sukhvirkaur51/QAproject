@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AddQueComponent } from '../add-que/add-que.component';
 import { UserService } from '../shared/user.service';
 // import { Router } from '@angular/router';
@@ -12,7 +13,10 @@ import { UserService } from '../shared/user.service';
 })
 export class QuestionsComponent implements OnInit {
 
-  constructor(public dialog:MatDialog, public userserviceobj:UserService) { }
+  constructor(public dialog:MatDialog, public userserviceobj:UserService, private router:Router) { }
+
+
+  id:any;
 
   ansresponse:any=[];
   answ:any=[];
@@ -20,7 +24,25 @@ export class QuestionsComponent implements OnInit {
   answerresponse:any=[];
   ans:any=[];
 
+  credentialdata:any=[];
+  cred:any=[];
+
   ngOnInit(): void {
+
+    this.id=this.userserviceobj.getuserid();
+
+
+    // this.userserviceobj.displayallcred().subscribe((res)=>{
+    //   // console.log(res)
+    //        this.credentialdata=res;
+    //         console.log(this.credentialdata);
+    //         this.cred=this.credentialdata.data;
+    //         console.log(this.cred);
+    // }
+    // ,(err)=>{
+    //   console.log(err);
+
+    // })
 
 this.userserviceobj.displayallans().subscribe((res)=>{
       this.ansresponse=res;
@@ -41,6 +63,7 @@ this.userserviceobj.displayallans().subscribe((res)=>{
    console.log(res);
    this.ans=this.answerresponse.data;
   alert (" new answer added successfully");
+  this.router.navigateByUrl('/profile');
  }
  ,(err)=>{
    console.log(err);
@@ -53,5 +76,12 @@ this.userserviceobj.displayallans().subscribe((res)=>{
       width: '750px'});
   }
 
+
+
+askque(){
+  const dialogref = this.dialog.open(AddQueComponent,{
+    height:'600px',
+    width: '750px'});
+}
 
 }
