@@ -12,6 +12,9 @@ export class EditCredentialsComponent implements OnInit {
 
   constructor(public userserviceobj:UserService, private dialog:MatDialog) { }
 
+  successalert:boolean=false;
+  failalert:boolean=false
+
   editcred:any=[];
   edit:any=[];
 
@@ -43,19 +46,36 @@ export class EditCredentialsComponent implements OnInit {
   OnSubmit(f:NgForm){
     console.log(f.value);
    this.userserviceobj.updatecredentials(f.value).subscribe((res)=>{
-     console.log(res);
+    //  console.log(res);
      this.editcred=res;
      this.edit=this.editcred.data;
      console.log(this.edit);
-     this.dialog.closeAll();
+
+     this.successalert=true;
 
 
-   })
+
+   },(err)=>{
+    console.log(err);
+    this.failalert=true
+  })
 
 
 }
 
   close(){
     this.dialog.closeAll();
+  }
+
+  successclosealert(){
+    this.successalert=false;
+    this.dialog.closeAll();
+    location.reload();
+  }
+
+
+  failclosealert(){
+    this.failalert=false;
+
   }
 }

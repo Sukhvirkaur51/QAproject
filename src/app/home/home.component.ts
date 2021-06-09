@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(public userserviceobj:UserService) { }
 
   ngOnInit(): void {
-    // console.log(this.userserviceobj.isloggedIn())
+
   }
 
 }

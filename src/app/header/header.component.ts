@@ -22,7 +22,9 @@ export class HeaderComponent implements OnInit {
       this.userdata=res;
       this.userinfo=this.userdata.data;
        console.log(this.userinfo);   //give userinfo on console without success and msg in backend format.
-    })
+
+
+      })
   }
 
 

@@ -57,7 +57,8 @@ id:any;
     question:'',
     category:'',
     about:'',
-    userid:this.getuserid()
+    userid:this.getuserid(),
+    // answerid:''
   };
 
 public addcred:Addcredentials={
@@ -75,13 +76,14 @@ public answers:Answer={
   questionid:'',
   userid:this.getuserid(),
   credentialid:'',
-  date:''
+  date:'',
+  likes:''
 };
 
-public profileimage:Profile={
-  userid:this.getuserid(),
-  image:'',
-};
+// public profileimage:Profile={
+//   userid:this.getuserid(),
+//   image:'',
+// };
 
 
   constructor(private http:HttpClient) { }
@@ -129,10 +131,6 @@ displaycredentials(id:any){
   return this.http.get('http://localhost:3200/displaycred/'+id);
 }
 
-// displayallcred(){
-//   return this.http.get('http://localhost:3200/displayallcred');
-// }
-
 
 
 
@@ -162,12 +160,21 @@ updatecredentials(selectedcred:Addcredentials){
 
 
 
-userimage(profilepic:Profile){
-  return this.http.post('http://localhost:3200/imageupload',profilepic);
+userimage(userid:any, image:any){
+  const formdata:any=new FormData();
+  formdata.append('userid', userid)
+  formdata.append('image',image)
+  return this.http.post('http://localhost:3200/imageupload',formdata);
+}
+displayuserimage(id:any){
+  return this.http.get('http://localhost:3200/displayimage/'+id);
 }
 
 
 
+// updatelike(id:any){
+//   return this.http.put('http://localhost:3200/updatelikes/'+);
+// }
 
 //use localstorage to store token
 setToken(token:string){

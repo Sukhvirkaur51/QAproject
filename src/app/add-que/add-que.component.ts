@@ -13,6 +13,9 @@ export class AddQueComponent implements OnInit {
 
   constructor(public userserviceobj:UserService, public router:Router,private dialog:MatDialog) { }
 
+  successalert:boolean=false;
+  failalert:boolean=false
+
   id:any;
   userdata:any=[];
   userinfo:any=[];
@@ -31,14 +34,12 @@ export class AddQueComponent implements OnInit {
   onadd(f:NgForm){
     this.userserviceobj.addques(f.value).subscribe((res)=>{
       console.log(res);
-      alert('Question added successfully');
-      this.dialog.closeAll();
-      location.reload();
-       this.router.navigateByUrl('/profile')
+      this.successalert=true
 
 
     },(err)=>{
       console.log(err);
+      this.failalert=true
     }
     )
 
@@ -48,6 +49,19 @@ export class AddQueComponent implements OnInit {
     this.dialog.closeAll();
   }
 
+
+  successclosealert(){
+    this.successalert=false;
+    this.dialog.closeAll();
+    this.router.navigateByUrl('/profile');
+
+
+  }
+
+  failclosealert(){
+    this.failalert=false;
+
+  }
   }
 
 

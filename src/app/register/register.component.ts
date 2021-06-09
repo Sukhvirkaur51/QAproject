@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
 
   contactNumberPattern="^[6-9][0-9]{9}$";
 
-
+  successalert:boolean=false;
+  failalert:boolean=false
 
 
   ngOnInit(): void{}
@@ -27,18 +28,28 @@ export class RegisterComponent implements OnInit {
     console.log(f.value);
     this.userserviceobj.register(f.value).subscribe((res)=>{
       console.log(res);
-      alert('Register Successfully');
-      this.router.navigateByUrl('/login');
+      // alert('Register Successfully');
+      // this.router.navigateByUrl('/login');
+      this.successalert=true
 
     },(err)=>{
       console.log(err);
-      alert('Register first');
+      // alert('Register first');
+      this.failalert=true
     }
     )
 
   }
 
+  successclosealert(){
+    this.successalert=false;
+    this.router.navigateByUrl('/login');
 
+  }
+
+  failclosealert(){
+    this.failalert=false;
+  }
 
 
   }

@@ -9,6 +9,19 @@
 <body>
 
 <div class="container-fluid maindiv">
+  <div  *ngIf="successalert" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!!</strong>Answer added Successfully...
+    <button type="button" (click)="successclosealert()" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div  *ngIf="failalert" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error occurs!!</strong>Try Again....
+    <button type="button" (click)="failclosealert()" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   <div class="row">
 
 <!-- Left div -->
@@ -83,9 +96,13 @@
             <!-- Mod note: This question is about why Postman is not subject to CORS restrictions in the same way an XMLHttpRequest is. … I know that the API or remote resource must set the header, but why did it work when I made the request via the Chrome extension Postman? -->
            </div>
            <div class="bottom">
-             <a href="#"><img id="like" class="imghw" src="../../assets/assets/img/icon/like4.jpg" alt="like"></a><span>7.4K</span>
-             <a href="#"><img  class="imghw ml-3" src="../../assets/assets/img/icon/dislikee.jpg" alt="dislike"></a>
-             <a class="ml-3" href="#"><img class="imghw" src="../../assets/assets/img/icon/share2.jpg" alt="share"></a><span class="ml-2 mr-4">21</span>
+             <!-- <a href="#"><img id="like" class="imghw" src="../../assets/assets/img/icon/like4.jpg" alt="like"></a><span>7.4K</span> -->
+             <button type="submit" class="imghw" mat-flat-button ><i class="fa fa-thumbs-up" (click)="incLikes()">  0 likes</i></button>
+
+             <button type="submit" class="imghw ml-2 mt-2" mat-flat-button ><i class="fa fa-thumbs-down" (click)="decLikes()"> 0 dislikes</i></button>
+             <!-- <a href="#"><img  class="imghw ml-3" src="../../assets/assets/img/icon/dislikee.jpg" alt="dislike"></a> -->
+             <!-- <a class="ml-3" href="#"><img class="imghw" src="../../assets/assets/img/icon/share2.jpg" alt="share"></a><span class="ml-2 mr-4">21</span> -->
+             <button type="submit" class="imghw ml-4 mt-2" mat-flat-button ><i class="fa fa-share" ng-click="incrementLikes(technology)">share</i></button>
              <!-- <a href="#"><img src="../../assets/svg(s)/send.png" alt="share"></a><br><br> -->
              <!-- <span><a href="#"><img src="../../assets/svg(s)/more.png" alt="more"></a></span> -->
              <mat-accordion>
@@ -110,39 +127,68 @@
                         <a href="#"><img src="../../assets/assets/img/icon/ordered.png" width="18" class="ml-2" alt="ordered"></a>
                       </span>
                     </div>
-                    <div class="inputans">
-                      <form #answer="ngForm" (ngSubmit)="postans(answer)">
 
-                        <input
-                        type="hidden"
-                        name="userid"
-                        #userid="ngModel"
-                        [(ngModel)]="userserviceobj.answers.userid">
-
-                        <input
-                        type="hidden"
-                        name="questionid"
-                        #questionid="ngModel"
-                        [(ngModel)]="ans1.questionid._id"
-                        >
-
-                        <!-- <input
-                        type="hidden"
-                        name="credentialid"
-                        #credentialid="ngModel"
-                        [(ngModel)]="ans1.credentialid._id"
-                        > -->
-
+                    <div *ngIf="this.userserviceobj.getuserid()==null; else elseBlock">
                       <mat-form-field class="ansfield">
                         <textarea matInput name="answer" class="answerText"  rows="3" placeholder="Write Answer"
                         #answer="ngModel"
                        [(ngModel)]="userserviceobj.answers.answer" ></textarea>
                       </mat-form-field>
-                      <button type="submit" class="postbtn" mat-stroked-button >Post</button>
-                      <button type="button" class="draftbtn mt-2" mat-stroked-button >Save Draft</button>
 
-                     </form>
-                    </div>
+                      <button type="submit" class="postbtn" (click)="alertbox()" mat-stroked-button >Post</button>
+                      <button type="button" class="draftbtn mt-2" (click)="alertbox()" mat-stroked-button >Save Draft</button>
+
+                     </div>
+
+
+                     <ng-template #elseBlock>
+                      <div class="inputans">
+                      <form #answerform="ngForm"
+                      (ngSubmit)="postans(answerform)">
+
+                       <input
+                       type="hidden"
+                       name="userid"
+                       #userid="ngModel"
+                       [(ngModel)]="userserviceobj.answers.userid">
+
+                       <input
+                       type="hidden"
+                       name="questionid"
+                       #questionid="ngModel"
+                       [(ngModel)]="ans1.questionid._id"
+                       >
+
+                       <!-- <input
+                       type="hidden"
+                       name="credentialid"
+                       #credentialid="ngModel"
+                       [(ngModel)]="ans1.credentialid._id"
+                       > -->
+
+                     <mat-form-field class="ansfield">
+                       <textarea matInput name="answer" class="answerText"  rows="3" placeholder="Write Answer"
+                       #answer="ngModel"
+                      [(ngModel)]="userserviceobj.answers.answer"
+                      required
+                      [ngClass]="{'is-invalid':answerform.submitted && answer.invalid}" ></textarea>
+                     </mat-form-field>
+                     <mat-error  *ngIf= "answerform.submitted && answer.invalid">
+                      <mat-error *ngIf="answer.errors?.required">
+                        Answer should be entered
+                      </mat-error>
+                      </mat-error>
+                      <br><br>
+
+
+                       <button type="submit" class="postbtn" mat-stroked-button >Post</button>
+                     <button type="button" class="draftbtn mt-2" mat-stroked-button >Save Draft</button>
+
+                    </form>
+                  </div>
+
+                    </ng-template>
+
                   </div>
 
                </mat-expansion-panel>
@@ -166,12 +212,12 @@
          </div>
          <div class="container-fluid Heading shadow-sm bg-body rounded btndiv">
            <!-- <tr><a routerLink="/addque">Ask a Question</a> -->
-           <button mat-button  class="btn-block" (click)="askque()">Ask a question</button>
+           <button mat-button  class="btn-block" (click)="openDialogue()">Ask a question</button>
 
          </div>
          <div class="container-fluid Heading shadow-sm bg-body rounded btndiv">
            <!-- <tr><a routerLink="/answer">Answer a Question</a></tr> -->
-           <button mat-button class="btn-block">Answer a Question</button>
+           <button mat-button class="btn-block" (click)="giveans()">Answer a Question</button>
          </div>
         <!-- </table> -->
         <div class="container Heading pt-2 shadow-sm p-3 mt-4 bg-body rounded">
@@ -198,7 +244,7 @@
       </div>
   </div>
 </div>
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
 
 </body>
 </html>

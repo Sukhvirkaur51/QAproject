@@ -14,6 +14,8 @@ import { RequestComponent } from './request/request.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import{HttpClientModule} from '@angular/common/http';
+// import { AngularFileUploaderModule } from "angular-file-uploader";
+import {FileUploadModule} from 'ng2-file-upload';
 
 // forms
 
@@ -34,7 +36,6 @@ import { AnswersComponent } from './answers/answers.component';
 import { AddQueComponent } from './add-que/add-que.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
 import {MatNativeDateModule} from '@angular/material/core';
 
 
@@ -74,6 +75,7 @@ import { EditCredentialsComponent } from './edit-credentials/edit-credentials.co
     AddcredentialsComponent,
     EditCredentialsComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,13 @@ import { EditCredentialsComponent } from './edit-credentials/edit-credentials.co
     HttpClientModule,
     MatMenuModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    // FileSelectDirective,
+    FileUploadModule
+
+
+
+
 ],
   providers: [],
   bootstrap: [AppComponent],

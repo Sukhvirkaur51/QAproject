@@ -11,34 +11,56 @@
 </head>
 <body>
   <div class="container emp-profile">
-    <form  method="post">
+    <div  *ngIf="successalert" class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Success!!</strong>Answer added Successfully...
+      <button type="button" (click)="successclosealert()" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div  *ngIf="failalert" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Error occurs!!</strong>Try Again....
+      <button type="button" (click)="failclosealert()" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- <form  method="post"> -->
         <div class="row">
             <div class="col-md-4">
-              <form #imageform="ngForm" (ngSubmit)="onadd(imageform)">
+
                 <div class="profile-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                    <img src={{image.image}} alt="profilepicture">
-                    <div class="file btn btn-lg btn-primary">
+
+                  <form [formGroup]= "imageform" (ngSubmit)="onadd()" enctype="multipart/form-data">
+                    <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/> -->
+
+                    <input
+                    type="hidden"
+                     name="userid"
+                     value="{{this.userserviceobj.getuserid()}}" formControlName="userid">
+
+
+                    <img src={{proimage.image}} alt="profilepicture">
+                    <!-- <img [src]="localUrl" style="height:100px;width:150px;"> -->
+
+                    <div class="file btn-lg btn-primary mx-auto mt-1">
                         Change Photo
-                        <input type="file" name="file"
-                        #file="ngModel"
-                     [(ngModel)]="userserviceobj.profileimage.image"/>
+                        <input type="file" name="image"
+                       (change)="showPreviewImage($event)"
+                        />
+
+
+
+                     <button mat-stroked-button
+                     class="ml-2 mt-2" type="submit">Upload</button>
+
                     </div>
-                    <div>
-                      <input
-                      type="hidden"
-                       name="userid"
-                       #userid="ngModel"
-                       [(ngModel)]="userserviceobj.profileimage.userid">
-                       <!-- <button mat-raised-button>Update</button> -->
-                       <!-- <input type="submit" placeholder="Update Picture"> -->
-                      </div>
-                      <!-- <button mat-stroked-button>Update Picture</button> -->
-                    <button mat-raised-button  class="ml-3" type="submit">Update picture</button>
+
+                       <!-- [disabled]="!uploader.getNotUploadedItems.length" -->
+                 </form>
                 </div>
-                  <!-- <button class="ml-5" mat-stroked-button type="submit">Update picture</button> -->
-              </form>
             </div>
+
+
             <div class="col-md-6">
                 <div class="profile-head">
                             <h1>
@@ -47,7 +69,7 @@
                             </h1>
 
                             <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                         </li>
@@ -70,16 +92,27 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <!-- <h3 (click)="addcred()">Add Credentials</h3><br> -->
-                    <button type="submit" (click)="editprofile()" class="rounded mt-3 ml-2"  mat-stroked-button>Edit Your profile </button>
+                    <!-- <button type="submit" (click)="editprofile()" class="rounded mt-5 ml-2"  mat-stroked-button>Edit Your profile </button> -->
                     <button type="submit" (click)="addcred()"  class="mt-3 ml-2" mat-stroked-button>Add Credentials </button>
-                    <button type="submit" (click)="editcred()"  class="mt-3 ml-2" mat-stroked-button>Edit Credentials </button>
+                    <!-- <button type="submit" (click)="editcred()"  class="mt-3 ml-2" mat-stroked-button>Edit Credentials </button> -->
                     <button type="submit" (click)="logout()" class="mt-3 ml-2" mat-stroked-button>Logout </button>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
-                  <!-- <div *ngFor="let cred1 of cred"> -->
+
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                      <span><h1>Your Profile
+                        <span class="wr">
+                          <mat-icon  class="ml-4 hover" (click)="editprofile()">edit</mat-icon>
+                          <p class="text">Edit Profile</p>
+                        </span>
+                      </h1></span>
+
+
+
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>FirstName</label>
@@ -122,7 +155,12 @@
                                 </div>
 
 
-                                <h1>Other Information</h1>
+                                <h1> Credentials
+                                  <span class="wr">
+                                    <mat-icon  class="ml-4 hover" (click)="editcred()">edit</mat-icon>
+                                    <p class="text">Edit Credentials</p>
+                                  </span>
+                                </h1>
 
                                 <div *ngFor="let cred1 of cred">
                                 <div class="row" >
@@ -240,7 +278,7 @@
                                     </div>
                                     <div class="inputans">
                                       <div *ngFor="let cred1 of cred">
-                                      <form #answer="ngForm" (ngSubmit)="postans(answer)">
+                                      <form #answerform="ngForm" (ngSubmit)="postans(answerform)">
 
                                         <input
                                         type="hidden"
@@ -266,8 +304,26 @@
                                       <mat-form-field class="ansfield">
                                         <textarea matInput name="answer" class="answerText"  rows="3" placeholder="Write Answer"
                                         #answer="ngModel"
-                                        [(ngModel)]="userserviceobj.answers.answer"></textarea>
+                                        [(ngModel)]="userserviceobj.answers.answer"
+                                        required
+                                       [ngClass]="{'is-invalid':answerform.submitted && answer.invalid}"></textarea>
                                       </mat-form-field>
+
+                                      <mat-error  *ngIf= "answerform.submitted && answer.invalid">
+                                        <mat-error *ngIf="answer.errors?.required">
+                                          Answer should be entered
+                                        </mat-error>
+                                        </mat-error>
+                                        <br><br>
+
+                                        <!-- <div class="row"  *ngIf="showMsg">
+                                          <div class="col-md-12">
+                                            <p class="alert alert-success">
+                                                <strong>Answer added Successfully.</strong>
+                                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            </p>
+                                          </div>
+                                        </div> -->
                                       <button type="submit" class="postbtn" mat-stroked-button >Post</button>
                                       <button type="button" class="draftbtn mt-2" mat-stroked-button >Save Draft</button>
 
@@ -333,7 +389,7 @@
                 </div>
             </div>
         <!-- </div> -->
-    </form>
+    <!-- </form> -->
 </div>
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>

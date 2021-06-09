@@ -81,7 +81,8 @@ module.exports.addquestions=(req,res)=>{
     question:req.body.question,
     category:req.body.category,
     about:req.body.about,
-    userid:req.body.userid
+    userid:req.body.userid,
+    // answerid:req.body.answerid
   });
   myquestion.save().then((docs)=>{
  return res.status(200).json({
@@ -140,7 +141,7 @@ module.exports.allquestion=(req,res)=>{
 
 var _id = mongoose.Types.ObjectId();
 module.exports.allanswers=(req,res)=>{
-  return ansData.find({},{_id:1, userid:1,questionid:1, credentialid:1, date:1}).populate('_id')
+  return ansData.find({},{ sort: { 'date' : 1 } },{_id:1, userid:1,questionid:1, credentialid:1, date:1}).populate('_id')
   .populate('questionid').populate('userid').populate('credentialid').exec().then((docs)=>{
     return res.status(200).json({
       success:true,
@@ -225,6 +226,7 @@ module.exports.displaycredentials=(req,res)=>{
 module.exports.addanswers=(req,res)=>{
   var myanswer=new ansData({
     answer:req.body.answer,
+    date:req.body.date,
     questionid:req.body.questionid,
     userid:req.body.userid,
     credentialid:req.body.credentialid
@@ -325,7 +327,7 @@ var storage=multer.diskStorage({
 
 
 
-  var upload=multer({storage:storage}).single('file');
+  var upload=multer({storage:storage}).single('image');
 
   module.exports.uploadimage=(req,res)=>{
     upload(req,res,(err)=>{
@@ -333,10 +335,12 @@ var storage=multer.diskStorage({
       console.log("error in uploading file" +err);
 
       else{
+        //console.log(req.file.path);
+
         console.log("file uploading successfully");
 
         var proimage=new proData({
-          userid:req.params.userid,
+          userid:req.body.userid,
           image:req.file.path
         });
 
@@ -360,4 +364,64 @@ var storage=multer.diskStorage({
       }
     })
   }
+
+
+  module.exports.displayimage=(req,res)=>{
+    return proData.find({userid:req.params.userid}).populate('userid').exec().then((docs)=>{
+      return res.status(200).json({
+        success:true,
+        message:'display image',
+        data:docs
+    })
+  }).catch((err)=>{
+    return res.status(400).json({
+      success:false,
+      message:'error in displaying',
+      error:err.message
+  })
+  })
+  }
+
+
+  // like answers
+  module.exports.likes=(req,res)=>{
+  ansData.findOneAndUpdate(req.body.answerid,{$push:{likes:req.userid}},{new:true})
+  .then((docs)=>{
+
+      return res.status(200).json({
+          success:true,
+          message:'likes increment',
+          data:docs
+      })  })
+      .catch((err)=>{
+          return res.status(401).json({
+              success:false,
+              message:"error while doing likes",
+              error:err.message
+          })
+      })
+
+  }
+
+
+
+  // unlike answers
+  module.exports.unlikes=(req,res)=>{
+    ansData.findByIdAndUpdate(req.body.answerid,{$pull:{likes:req.userid}},{new:true})
+    .then((docs)=>{
+
+        return res.status(200).json({
+            success:true,
+            message:'likes decrement',
+            data:docs
+        })  })
+        .catch((err)=>{
+            return res.status(401).json({
+                success:false,
+                message:"error occurs",
+                error:err.message
+            })
+        })
+
+    }
 

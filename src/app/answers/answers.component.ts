@@ -13,6 +13,10 @@ export class AnswersComponent implements OnInit {
 
   constructor(public userserviceobj:UserService,private dialog:MatDialog,private router:Router) { }
 
+
+  successalert:boolean=false;
+  failalert:boolean=false
+
   id!:any;
   queid!:any;
 
@@ -68,25 +72,38 @@ this.userserviceobj.displayallques().subscribe((res)=>{
 }
 
   postans(f:NgForm){
-   console.log(f.value);
+  //  console.log(f.value);
   this.userserviceobj.addanswer(f.value).subscribe((res)=>{
     this.ansresponse=res;
     console.log(res);
     this.ans=this.ansresponse.data;
-    alert("answer added successfully");
-    this.router.navigateByUrl('/profile');
+
+    this.successalert=true;
+
+
 
   }
   ,(err)=>{
     console.log(err);
+    this.failalert=true;
+
   })
 }
 
-close(){
-  this.dialog.closeAll();
+// close(){
+//   this.dialog.closeAll();
+// }
+
+successclosealert(){
+  this.successalert=false;
+  this.router.navigateByUrl('/profile')
 }
 
 
+failclosealert(){
+  this.failalert=false;
+
+}
 
 
 

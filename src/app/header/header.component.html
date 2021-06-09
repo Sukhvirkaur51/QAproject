@@ -1,6 +1,6 @@
 <!-- <header> -->
 
-  <!-- <div *ngIf="this.userserviceobj.isloggedIn()==null; else elseBlock"> -->
+  <div *ngIf="this.userserviceobj.getuserid()==null; else elseBlock">
      <!-- Content to render when condition is true. -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -26,7 +26,7 @@
               <a class="nav-link" routerLink="/questions">Question</a>
             </li>
             <li class="nav-item ml-3">
-              <a class="nav-link" routerLink="/answers">Answer</a>
+              <a class="nav-link" routerLink="/answers">Give Answer</a>
             </li>
             <li class="nav-item ml-3">
               <a class="nav-link" routerLink="/">Help</a>
@@ -38,14 +38,14 @@
               <a class="nav-link" routerLink="/profile">Profile</a>
             </li> -->
 
-            <button mat-button [matMenuTriggerFor]="menu"><img src="../../assets/assets/img/icon/userimg.jpg" width="28" alt=""></button>
+            <!-- <button mat-button [matMenuTriggerFor]="menu"><img src="../../assets/assets/img/icon/userimg.jpg" width="28" alt=""></button>
   <mat-menu #menu="matMenu" class="optionmenu">
     <button  mat-menu-item class="d-block btn-block"><img src="../../assets/assets/img/icon/userimg.jpg" width="35" alt=""></button>
     <button mat-menu-item (click)="profileop()" class="btn-block mt-2"><p class="namebtn">{{userinfo.firstname}} {{userinfo.lastname}}<i class="bi bi-arrow-right-circle-fill"></i></p></button>
     <mat-divider></mat-divider>
-    <button mat-menu-item><i class="bi bi-bookmark"></i>Messages</button>
+    <button mat-menu-item><i class="bi bi-bookmark"></i>Messages</button> -->
     <!-- <button mat-menu-item>Create Ad</button> -->
-     <button mat-menu-item>Your Content</button>
+     <!-- <button mat-menu-item>Your Content</button>
     <button mat-menu-item><mat-icon>bookmark</mat-icon>Bookmarks</button>
     <button mat-menu-item><mat-icon>drafts</mat-icon>Drafts</button>
     <mat-divider></mat-divider>
@@ -54,7 +54,7 @@
     <button mat-menu-item>help</button>
     <button mat-menu-item>Logout</button>
 
-  </mat-menu>
+  </mat-menu> -->
 
           </ul>
           <form class="d-flex justify-content-end">
@@ -65,7 +65,7 @@
         </div>
       </div>
     </nav>
-  <!-- </div> -->
+  </div>
 
 
 <ng-template #elseBlock>
@@ -83,11 +83,11 @@
           <li class="nav-item ">
             <a class="nav-link " aria-current="page" routerLink="/">Home</a>
           </li>
-          <li class="nav-item ml-3">
+          <!-- <li class="nav-item ml-3">
             <a class="nav-link" routerLink="/register">Sign Up</a>
-          </li>
+          </li> -->
           <li class="nav-item ml-3">
-            <a class="nav-link" routerLink="/addque">Add Questions</a>
+            <a class="nav-link" routerLink="/addque">Ask Question</a>
           </li>
 
           <!-- <li class="nav-item ml-3">
@@ -97,7 +97,7 @@
             <a class="nav-link" routerLink="/questions">Question</a>
           </li>
           <li class="nav-item ml-3">
-            <a class="nav-link" routerLink="/answers">Answer</a>
+            <a class="nav-link" routerLink="/answers">Give Answer</a>
           </li>
           <li class="nav-item ml-3">
             <a class="nav-link" routerLink="/">Help</a>

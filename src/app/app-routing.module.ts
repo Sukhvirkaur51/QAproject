@@ -43,15 +43,18 @@ const routes: Routes = [
   },
   {
     path:'answers',
-    component:AnswersComponent
+    component:AnswersComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'addque',
-    component:AddQueComponent
+    component:AddQueComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'editprofile',
-    component:EditprofileComponent
+    component:EditprofileComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'logout',
@@ -59,11 +62,13 @@ const routes: Routes = [
   },
   {
     path:'addcredentials',
-    component:AddcredentialsComponent
+    component:AddcredentialsComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'editcredentials',
-    component:EditCredentialsComponent
+    component:EditCredentialsComponent,
+    canActivate:[AuthGuard]
   }
 ];
 

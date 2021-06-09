@@ -13,6 +13,9 @@ export class AddcredentialsComponent implements OnInit {
 
   constructor(public userserviceobj:UserService ,public router:Router,private dialog:MatDialog) { }
 
+  successalert:boolean=false;
+  failalert:boolean=false
+
   id:any;
   credentialdata:any=[];
   cred:any=[];
@@ -35,12 +38,11 @@ export class AddcredentialsComponent implements OnInit {
             this.cred=this.credentialdata.data;
             console.log(this.cred);
 
-      //  location.reload();
-       this.router.navigateByUrl('/profile')
-      this.dialog.closeAll();
+            this.successalert=true
 
     },(err)=>{
       console.log(err);
+      this.failalert=true
     }
     )
 
@@ -48,6 +50,18 @@ export class AddcredentialsComponent implements OnInit {
 
   close(){
     this.dialog.closeAll();
+  }
+
+  successclosealert(){
+    this.successalert=false;
+    this.dialog.closeAll();
+    location.reload();
+  }
+
+
+  failclosealert(){
+    this.failalert=false;
+
   }
 
 }

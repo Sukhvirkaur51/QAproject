@@ -4,4 +4,5 @@ export class Answer {
   userid!:any;
   credentialid!:any;
   date!:any;
+  likes:any=[];
 }

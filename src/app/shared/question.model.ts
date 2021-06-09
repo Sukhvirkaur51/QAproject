@@ -3,6 +3,7 @@ export class Question {
   category!:string;
   about!:string;
    userid!:any;
+  //  answerid!: any;
 
 }
 

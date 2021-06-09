@@ -4,8 +4,11 @@ var routes=require('./routes/userroutes');
 var mongoose = require('mongoose');
 var express=require('express');
 var bodyparser=require('body-parser');
+const path = require("path");
 mongoose.set('useCreateIndex', true);
 const app=express();
+
+app.use("/uploads", express.static(path.join("backend/uploads")));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(cors());

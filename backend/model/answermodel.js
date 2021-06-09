@@ -5,6 +5,7 @@ require('./usermodel');
 var answerSchema=mongoose.Schema({
   answer:{
     type:String,
+    required:[true,"answer is required"]
   },
 
   questionid:{
@@ -23,9 +24,12 @@ var answerSchema=mongoose.Schema({
   },
   date:{
     type:Date,
-    default:Date.now()
-  }
+    default:Date()
+    // default:date.format(Date.now(), 'DD-[MM]-YYYY')
+  },
 
+  likes:[{type:mongoose.Schema.Types.ObjectId,
+    ref:'register'}]
 
 });
 

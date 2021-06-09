@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { AddQueComponent } from '../add-que/add-que.component';
 import { AddcredentialsComponent } from '../addcredentials/addcredentials.component';
@@ -9,6 +8,10 @@ import { AnswersComponent } from '../answers/answers.component';
 import { EditCredentialsComponent } from '../edit-credentials/edit-credentials.component';
 import { EditprofileComponent } from '../editprofile/editprofile.component';
 import { UserService } from '../shared/user.service';
+import {FormBuilder} from '@angular/forms'
+
+
+
 
 @Component({
   selector: 'app-profile',
@@ -17,21 +20,37 @@ import { UserService } from '../shared/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(public userserviceobj:UserService , public router:Router,private dialog:MatDialog) { }
+  imageform!:FormGroup;
 
- count!:0;
+
+
+  constructor(public userserviceobj:UserService , public router:Router,private dialog:MatDialog, public fb:FormBuilder) {
+
+    //Reactive form
+    this.imageform = this.fb.group({
+      userid:[this.userserviceobj.getuserid()],
+      image:[null]
+
+    })
+
+
+   }
+
 
   id:any;
+
+  successalert:boolean=false;
+  failalert:boolean=false
 
   userdata:any=[];
   userinfo:any=[];
 
   quesresponse:any=[];
   que:any=[];
-
+datafile:any
   answerresponse:any=[];
   ans:any=[];
-  // question:any=[];
+localUrl:any
 
   answerresponse1:any=[];
   ans1:any=[];
@@ -40,12 +59,15 @@ export class ProfileComponent implements OnInit {
   cred:any=[];
 
   imagedata:any=[];
-  image:any=[];
+  proimage:any=[];
+
+
 
   ngOnInit(){
 
 
-  //  console.log(this.count);
+
+//user information
    this.id=this.userserviceobj.getuserid();   //get userid and sent with api to get userinfo
       console.log(this.id);                   //gives id of user in normal form
     this.userserviceobj.display(this.id).subscribe((res)=>{  //with display method returns success,msg,data
@@ -55,6 +77,24 @@ export class ProfileComponent implements OnInit {
     })
 
 
+
+// display user image
+    this.userserviceobj.displayuserimage(this.id).subscribe((res)=>{
+      console.log(this.id);
+      this.imagedata=res;
+      this.proimage=this.imagedata.data[0];
+      console.log(this.proimage);
+
+    }
+    ,(err)=>{
+      console.log(err);
+
+    }
+    )
+
+
+
+ //display user's question
     this.userserviceobj.displayques(this.id).subscribe((res)=>{
       this.quesresponse=res;
       this.que=this.quesresponse.data;
@@ -68,9 +108,8 @@ export class ProfileComponent implements OnInit {
     )
 
 
-
+ // display user's credentials
     this.userserviceobj.displaycredentials(this.id).subscribe((res)=>{
-      // console.log(res)
            this.credentialdata=res;
             console.log(this.credentialdata);
             this.cred=this.credentialdata.data;
@@ -83,13 +122,12 @@ export class ProfileComponent implements OnInit {
 
 
 
+    // display answers
     this.userserviceobj.displayanswer(this.id).subscribe((res)=>{
       console.log(this.id);
     this.answerresponse=res;
       this.ans=this.answerresponse.data;
       console.log(this.ans);
-
-   //alert(JSON.stringify(this.ans))
 
     }
     ,(err)=>{
@@ -98,39 +136,80 @@ export class ProfileComponent implements OnInit {
     }
     )
 
+
 }
 
+
+// submit answers
 postans(f:NgForm){
   console.log(f.value);
  this.userserviceobj.addanswer(f.value).subscribe((res)=>{
    this.answerresponse1=res;
    console.log(res);
    this.ans1=this.answerresponse1.data;
-  //  location.reload();
-   alert("answer added successfully");
+   this.successalert= true;
  }
  ,(err)=>{
    console.log(err);
+   this.failalert= true;
+
  })
 }
 
 
-
-onadd(f:NgForm){
-  console.log(f.value);
-  this.userserviceobj.userimage(f.value).subscribe((res)=>{
-
-    // console.log(res);
-    this.imagedata=res;
-    this.image=this.imagedata.data;
-    // console.log(this.image);
-    alert('profile picture added successfully');
-  },(err)=>{
-    console.log(err);
-  }
-  )
+//bootstrap alert for success
+successclosealert(){
+  this.successalert=false;
+  location.reload();
 }
 
+ //bootstrap alert for failure
+failclosealert(){
+  this.failalert=false;
+
+}
+
+
+// submit image data through form
+
+showPreviewImage(event: any) {
+  if (event.target.files && event.target.files[0]) {
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+        this.localUrl = event.target.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+const datafile=event.target.files[0];
+console.log(datafile);
+this.imageform.patchValue({
+image:datafile
+});
+
+}
+}
+
+onadd(){
+
+console.log(this.imageform.value);
+
+this.userserviceobj.userimage(this.imageform.value.userid, this.imageform.value.image).subscribe((res)=>{
+console.log(res);
+
+}
+,(err)=>{
+  console.log(err);
+  this.failalert= true;
+
+})
+
+
+}
+
+
+
+
+
+// open mat dialogs
 askque(){
 this.dialog.open(AddQueComponent ,{
   height: '800px',
@@ -145,7 +224,7 @@ giveans(){
 
 addcred(){
   if(this.cred.length==0){
-  const dialogRef= this.dialog.open(AddcredentialsComponent,{
+   this.dialog.open(AddcredentialsComponent,{
     height: '800px',
     width: '800px'});
   }
@@ -156,7 +235,7 @@ addcred(){
 }
 
 editcred(){
-  const dialogRef= this.dialog.open(EditCredentialsComponent,{
+  this.dialog.open(EditCredentialsComponent,{
     height: '800px',
     width: '800px'});
 }

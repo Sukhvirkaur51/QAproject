@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 
@@ -20,7 +21,10 @@ export class EditprofileComponent implements OnInit {
   edit:any=[];
 
 
-  constructor(public userserviceobj:UserService, private dialog:MatDialog) { }
+  successalert:boolean=false;
+  failalert:boolean=false
+
+  constructor(public userserviceobj:UserService, private dialog:MatDialog, private router:Router) { }
 
   ngOnInit(): void {
 
@@ -44,20 +48,38 @@ export class EditprofileComponent implements OnInit {
     OnSubmit(f:NgForm){
        console.log(f.value);
       this.userserviceobj.updateuser(f.value).subscribe((res)=>{
-        console.log(res);
+        // console.log(res);
         this.edituser=res;
         this.edit=this.edituser.data;
         console.log(this.edit);
-        this.dialog.closeAll();
+
+        this.successalert=true
 
 
-      })
+      },(err)=>{
+        console.log(err);
+        this.failalert=true
+      }
+      )
 
 
   }
 
   close(){
     this.dialog.closeAll();
+  }
+
+
+  successclosealert(){
+    this.successalert=false;
+    this.dialog.closeAll();
+    location.reload();
+  }
+
+
+  failclosealert(){
+    this.failalert=false;
+
   }
   }
 

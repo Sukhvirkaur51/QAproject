@@ -24,7 +24,12 @@ approute.put('/updateRecord/:id',myctrl.updatedData);  //for update
 approute.put('/updateCredentials/:userid',myctrl.updatedCredentials);  //for update
 
 
-approute.post('/imageupload/:user',myctrl.uploadimage);
+approute.post('/imageupload',myctrl.uploadimage);
+approute.get('/displayimage/:userid',myctrl.displayimage);
+
+approute.put('/updatelikes',myctrl.likes);  //for update
+approute.put('/updateunlikes',myctrl.unlikes);  //for update
+
 
 
 module.exports=approute
