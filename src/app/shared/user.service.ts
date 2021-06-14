@@ -76,6 +76,7 @@ public answers:Answer={
   questionid:'',
   userid:this.getuserid(),
   credentialid:'',
+  pictureid:'',
   date:'',
   likes:''
 };

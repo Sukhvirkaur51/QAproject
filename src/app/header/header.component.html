@@ -107,9 +107,27 @@
           </li>
 
 
-          <button mat-button [matMenuTriggerFor]="menu"><img src="../../assets/assets/img/icon/userimg.jpg" width="28" alt=""></button>
+<button mat-button [matMenuTriggerFor]="menu">
+  <ng-container *ngIf="proimage1==undefined; else picture">
+    <img src="../../assets/assets/img/icon/userimg.jpg" width="30"  alt="userimg">
+    </ng-container>
+
+   <ng-template #picture>
+    <img src= {{proimage1.image}}  class="img" width="30" >
+  </ng-template>
+  <!-- <img src="../../assets/assets/img/icon/userimg.jpg" width="28" alt=""> -->
+</button>
 <mat-menu #menu="matMenu" class="optionmenu">
-  <button  mat-menu-item class="d-block btn-block"><img src="../../assets/assets/img/icon/userimg.jpg" width="35" alt=""></button>
+  <button  mat-menu-item class="d-block btn-block">
+    <ng-container *ngIf="proimage1==undefined; else picture">
+      <img src="../../assets/assets/img/icon/userimg.jpg" width="30"  alt="userimg">
+      </ng-container>
+
+     <ng-template #picture>
+      <img src= {{proimage1.image}} width="30" >
+    </ng-template>
+    <!-- <img src="../../assets/assets/img/icon/userimg.jpg" width="35" alt=""> -->
+  </button>
   <button mat-menu-item (click)="profileop()" class="btn-block mt-2"><p class="namebtn">{{userinfo.firstname}} {{userinfo.lastname}}<i class="bi bi-arrow-right-circle-fill"></i></p></button>
   <mat-divider></mat-divider>
   <button mat-menu-item><i class="bi bi-bookmark"></i>Messages</button>

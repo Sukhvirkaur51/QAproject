@@ -15,6 +15,12 @@ export class HeaderComponent implements OnInit {
   userdata:any=[];
   userinfo:any=[];
 
+  imagedata:any=[];
+  proimage:any=[];
+  proimage1:any=[];
+  imagelength!:any;
+
+
   ngOnInit(): void {
     this.id=this.userserviceobj.getuserid();   //get userid and sent with api to get userinfo
       console.log(this.id);   //gives id of user in normal form
@@ -24,6 +30,24 @@ export class HeaderComponent implements OnInit {
        console.log(this.userinfo);   //give userinfo on console without success and msg in backend format.
 
 
+
+       // display user image
+    this.userserviceobj.displayuserimage(this.id).subscribe((res)=>{
+
+      this.imagedata=res;
+     this.proimage=this.imagedata.data;
+     this.imagelength=this.proimage.length;
+    this.proimage1=this.proimage[this.imagelength-1]
+
+    // console.log(this.proimage);
+    console.log(this.proimage1);
+
+      }
+      ,(err)=>{
+        console.log(err);
+
+      }
+      )
       })
   }
 

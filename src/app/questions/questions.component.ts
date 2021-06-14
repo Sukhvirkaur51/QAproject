@@ -30,9 +30,23 @@ export class QuestionsComponent implements OnInit {
   credentialdata:any=[];
   cred:any=[];
 
+  userdata:any=[];
+  userinfo:any=[];
+
+  imagedata:any=[];
+  proimage:any=[];
+  proimage1:any=[];
+   result : any[] = [];
+
   ngOnInit(): void {
 
     this.id=this.userserviceobj.getuserid();
+
+    this.userserviceobj.display(this.id).subscribe((res)=>{  //with display method returns success,msg,data
+      this.userdata=res;
+      this.userinfo=this.userdata.data;
+       console.log(this.userinfo);   //give userinfo on console without success and msg in backend format.
+    })
 
 this.userserviceobj.displayallans().subscribe((res)=>{
       this.ansresponse=res;
@@ -41,6 +55,28 @@ this.userserviceobj.displayallans().subscribe((res)=>{
       },(err)=>{
         console.log(err);
       })
+
+
+      // display user image
+    this.userserviceobj.displayuserimage(this.id).subscribe((res)=>{
+
+      this.imagedata=res;
+     this.proimage=this.imagedata.data;
+    //  console.log(this.proimage);
+      const imagelength=this.proimage.length;
+    this.proimage1=this.proimage[imagelength-1]    //proimage1 is in object prototype
+
+    this.result.push(this.proimage1);   //convert proto from object to string
+    console.log(this.proimage1);
+
+
+
+      }
+      ,(err)=>{
+        console.log(err);
+
+      }
+      )
 
   }
 

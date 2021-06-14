@@ -30,8 +30,12 @@
       [(ngModel)]="userserviceobj.regnew.firstname"
         #firstname="ngModel"
       matInput
-      placeholder="FirstName">
+      placeholder="FirstName"
+
+    >
    </mat-form-field>
+
+
    <br><br>
 
    <mat-form-field>
@@ -42,7 +46,8 @@
      [(ngModel)]="userserviceobj.regnew.lastname"
         #lastname="ngModel"
      matInput
-     placeholder="lastName">
+     placeholder="lastName"
+    >
   </mat-form-field>
   <br><br>
 
@@ -54,8 +59,16 @@
      [(ngModel)]="userserviceobj.regnew.email"
     #email="ngModel"
      matInput
-     placeholder="Email">
+     placeholder="Email"
+    email
+    [ngClass]="{'is-invalid':updateform.submitted && email.invalid}">
   </mat-form-field>
+
+  <mat-error  *ngIf= "updateform.submitted && email.invalid">
+    <mat-error *ngIf="email.errors?.email">
+      Invalid format
+     </mat-error>
+    </mat-error>
   <br><br>
 
   <mat-form-field>
@@ -66,12 +79,20 @@
      [(ngModel)]="userserviceobj.regnew.contact"
     #contact="ngModel"
      matInput
-     placeholder="Contact">
+     placeholder="Contact"
+     [ngClass]="{'is-invalid':updateform.submitted && contact.invalid}"
+     [pattern]="contactNumberPattern">
   </mat-form-field>
+
+  <mat-error *ngIf= "updateform.submitted && contact.invalid">
+    <mat-error *ngIf="contact.errors?.pattern">
+      Contact number is invalid
+    </mat-error>
+  </mat-error>
   <br><br>
 
 
-  <button type="submit" mat-raised-button color="primary">Update User</button>
+  <button type="submit" [disabled]="updateform.invalid" mat-raised-button color="primary">Update User</button>
 
   </form>
 </mat-card>

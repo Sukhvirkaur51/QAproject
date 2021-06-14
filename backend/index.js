@@ -8,7 +8,7 @@ const path = require("path");
 mongoose.set('useCreateIndex', true);
 const app=express();
 
-app.use("/uploads", express.static(path.join("backend/uploads")));
+app.use("/uploads", express.static(path.join("uploads")));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(cors());

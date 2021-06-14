@@ -30,6 +30,9 @@ approute.get('/displayimage/:userid',myctrl.displayimage);
 approute.put('/updatelikes',myctrl.likes);  //for update
 approute.put('/updateunlikes',myctrl.unlikes);  //for update
 
+approute.post('/forgetpass', myctrl.forgetpassword);
+approute.post('/resetpassword/:token', myctrl.resetPass);
+
 
 
 module.exports=approute

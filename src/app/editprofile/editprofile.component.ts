@@ -11,6 +11,7 @@ import { UserService } from '../shared/user.service';
   styleUrls: ['./editprofile.component.css']
 })
 export class EditprofileComponent implements OnInit {
+  contactNumberPattern="^[6-9][0-9]{9}$";
 
 
   id:any;

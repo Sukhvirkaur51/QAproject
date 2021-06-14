@@ -9,6 +9,7 @@ import { EditCredentialsComponent } from '../edit-credentials/edit-credentials.c
 import { EditprofileComponent } from '../editprofile/editprofile.component';
 import { UserService } from '../shared/user.service';
 import {FormBuilder} from '@angular/forms'
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 
@@ -60,6 +61,9 @@ localUrl:any
 
   imagedata:any=[];
   proimage:any=[];
+  proimage1:any=[];
+  imagelength!:any;
+  result : any[] = [];
 
 
 
@@ -77,13 +81,17 @@ localUrl:any
     })
 
 
-
 // display user image
     this.userserviceobj.displayuserimage(this.id).subscribe((res)=>{
-      console.log(this.id);
-      this.imagedata=res;
-      this.proimage=this.imagedata.data[0];
-      console.log(this.proimage);
+
+    this.imagedata=res;
+   this.proimage=this.imagedata.data;
+   this.imagelength=this.proimage.length;
+  this.proimage1=this.proimage[this.imagelength-1]
+
+  // this.result.push(this.proimage1);   //convert proto from object to array
+  // console.log(this.result);
+  console.log(this.proimage1);
 
     }
     ,(err)=>{
@@ -194,6 +202,7 @@ console.log(this.imageform.value);
 
 this.userserviceobj.userimage(this.imageform.value.userid, this.imageform.value.image).subscribe((res)=>{
 console.log(res);
+location.reload();
 
 }
 ,(err)=>{
@@ -235,10 +244,17 @@ addcred(){
 }
 
 editcred(){
+  if(this.cred.length==0){
+    alert("To edit credentials, you have to add it first!...")
+    this.dialog.open(AddcredentialsComponent,{
+      height: '800px',
+      width: '800px'});
+  }
+  else{
   this.dialog.open(EditCredentialsComponent,{
     height: '800px',
     width: '800px'});
-}
+}}
 
  logout(){
   this.router.navigateByUrl('/logout');

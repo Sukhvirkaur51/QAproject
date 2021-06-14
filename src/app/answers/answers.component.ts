@@ -32,6 +32,12 @@ export class AnswersComponent implements OnInit {
   credentialdata:any=[];
   cred:any=[];
 
+
+  imagedata:any=[];
+  proimage:any=[];
+  proimage1:any=[];
+  imagelength!:any;
+
   ngOnInit(): void {
 
     this.id=this.userserviceobj.getuserid();   //get userid and sent with api to get userinfo
@@ -67,6 +73,25 @@ this.userserviceobj.displayallques().subscribe((res)=>{
       console.log(err);
 
     })
+
+
+    // display user image
+    this.userserviceobj.displayuserimage(this.id).subscribe((res)=>{
+
+      this.imagedata=res;
+     this.proimage=this.imagedata.data;
+     this.imagelength=this.proimage.length;
+    this.proimage1=this.proimage[this.imagelength-1]
+
+    // console.log(this.proimage);
+    console.log(this.proimage1);
+
+      }
+      ,(err)=>{
+        console.log(err);
+
+      }
+      )
 
 
 }

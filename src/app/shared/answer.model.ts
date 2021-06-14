@@ -3,6 +3,7 @@ export class Answer {
   questionid!:any;
   userid!:any;
   credentialid!:any;
+  pictureid!:any;
   date!:any;
   likes:any=[];
 }

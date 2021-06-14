@@ -28,6 +28,11 @@ var answerSchema=mongoose.Schema({
     // default:date.format(Date.now(), 'DD-[MM]-YYYY')
   },
 
+  pictureid:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'profilepicture'
+  },
+
   likes:[{type:mongoose.Schema.Types.ObjectId,
     ref:'register'}]
 

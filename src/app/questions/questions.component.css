@@ -100,3 +100,7 @@ button.draftbtn{
   height: 5%;
   width: 5%;
 }
+
+.img {
+  border-radius: 50%;
+}

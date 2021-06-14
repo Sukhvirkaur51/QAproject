@@ -47,14 +47,18 @@
       </ul>
      </div>
      <div class="container pl-4 divw">
-       <span class="username ml-4 text-cap"><img src="../../assets/assets/img/icon/userimg.jpg" width="25"  alt="userimg">{{userinfo.firstname}} {{userinfo.lastname}}</span>
-       <!-- <span> asked to</span> -->
-       <!-- <select class="form-select form-select-sm to" aria-label=".form-select-sm example">
-         <option selected>Public</option>
-         <option value="1">Anonyms</option>
-         <option value="2">Limited</option>
+       <span class="username ml-4 text-cap">
+        <ng-container *ngIf="proimage1==undefined; else picture">
+          <img src="../../assets/assets/img/icon/userimg.jpg" width="30"  alt="userimg">
+          </ng-container>
 
-       </select>-->
+         <ng-template #picture>
+          <img src= {{proimage1.image}} class="img" width="45" >
+        </ng-template>
+         <!-- <img src="../../assets/assets/img/icon/userimg.jpg" width="25"  alt="userimg"> -->
+         {{userinfo.firstname}} {{userinfo.lastname}}
+        </span>
+
        <br><br>
 
 
@@ -63,7 +67,7 @@
         type="hidden"
         name="userid"
         #userid="ngModel"
-        [(ngModel)]="userserviceobj.newquestion.userid"
+        [(ngModel)]="userinfo._id"
 
         >
 
