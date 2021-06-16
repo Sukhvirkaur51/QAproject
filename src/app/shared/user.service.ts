@@ -4,8 +4,6 @@ import{User,Loginuser} from './user.model';
 import{Question} from './question.model';
 import{Addcredentials} from './addcredentials.model';
 import{Answer} from './answer.model'
-import { Observable } from 'rxjs';
-import { Profile } from './profile.model';
 
 @Injectable({
   providedIn: 'root'
@@ -80,11 +78,6 @@ public answers:Answer={
   date:'',
   likes:''
 };
-
-// public profileimage:Profile={
-//   userid:this.getuserid(),
-//   image:'',
-// };
 
 
   constructor(private http:HttpClient) { }
@@ -173,9 +166,22 @@ displayuserimage(id:any){
 
 
 
-// updatelike(id:any){
-//   return this.http.put('http://localhost:3200/updatelikes/'+);
-// }
+updatelike(data:any){
+  return this.http.put(`${'http://localhost:3200/updatelikes'}/${this.getuserid()}`,data);
+}
+
+
+//email sending for forget password
+forgetpassword(user:User){
+  return this.http.post('http://localhost:3200/forgetpass',user);
+}
+
+//resetpassword
+resetpassword(password:User){
+  return this.http.post('http://localhost:3200/resetpass/:token',password);
+
+}
+
 
 //use localstorage to store token
 setToken(token:string){

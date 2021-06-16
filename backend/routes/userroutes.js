@@ -27,8 +27,8 @@ approute.put('/updateCredentials/:userid',myctrl.updatedCredentials);  //for upd
 approute.post('/imageupload',myctrl.uploadimage);
 approute.get('/displayimage/:userid',myctrl.displayimage);
 
-approute.put('/updatelikes',myctrl.likes);  //for update
-approute.put('/updateunlikes',myctrl.unlikes);  //for update
+approute.put('/updatelikes/:userid',myctrl.likes);  //for update
+approute.put('/updateunlikes/:userid',myctrl.unlikes);  //for update
 
 approute.post('/forgetpass', myctrl.forgetpassword);
 approute.post('/resetpassword/:token', myctrl.resetPass);

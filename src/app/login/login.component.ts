@@ -61,5 +61,11 @@ export class LoginComponent implements OnInit {
 
    failclosealert(){
     this.failalert=false;
-  }
+
+}
+
+
+sendmail(){
+
+}
 }

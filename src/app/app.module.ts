@@ -47,6 +47,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AddcredentialsComponent } from './addcredentials/addcredentials.component';
 import { EditCredentialsComponent } from './edit-credentials/edit-credentials.component';
+import { ForgetpassComponent } from './forgetpass/forgetpass.component';
+import { ResetpassComponent } from './resetpass/resetpass.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { EditCredentialsComponent } from './edit-credentials/edit-credentials.co
     LogoutComponent,
     AddcredentialsComponent,
     EditCredentialsComponent,
+    ForgetpassComponent,
+    ResetpassComponent,
 
 
   ],

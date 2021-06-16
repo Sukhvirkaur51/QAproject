@@ -11,7 +11,8 @@ import { UserService } from '../shared/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-
+  hide = true;
+  hide1= true;
   constructor(public userserviceobj:UserService ,private router:Router) { }
 
   contactNumberPattern="^[6-9][0-9]{9}$";

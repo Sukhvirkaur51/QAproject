@@ -6,12 +6,14 @@ import { AnswersComponent } from './answers/answers.component';
 import { ContactNowComponent } from './contact-now/contact-now.component';
 import { EditCredentialsComponent } from './edit-credentials/edit-credentials.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { ForgetpassComponent } from './forgetpass/forgetpass.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { RegisterComponent } from './register/register.component';
+import { ResetpassComponent } from './resetpass/resetpass.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
@@ -69,6 +71,14 @@ const routes: Routes = [
     path:'editcredentials',
     component:EditCredentialsComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path:'forgetpass',
+    component:ForgetpassComponent
+  },
+  {
+    path:'resetpass',
+    component:ResetpassComponent
   }
 ];
 

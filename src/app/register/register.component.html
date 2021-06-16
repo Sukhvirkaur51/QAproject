@@ -48,10 +48,11 @@
                       <input type="text" name="firstname" id="firstname" placeholder="First Name"
                       #firstname="ngModel" [(ngModel)]="userserviceobj.regnew.firstname"
                       required
-                     [ngClass]="{'is-invalid':registerform.submitted && firstname.invalid}"/>
+                     [ngClass]="{'is-invalid':registerform.submitted && firstname.invalid}"
+                     />
                     </div>
 
-                      <mat-error  *ngIf= "registerform.submitted && firstname.invalid">
+                      <mat-error  *ngIf= "firstname.invalid && (firstname.dirty || firstname.touched)">
                         <mat-error *ngIf="firstname.errors?.required">
                           First name should be entered
                         </mat-error>
@@ -68,7 +69,7 @@
                     [ngClass]="{'is-invalid':registerform.submitted && lastname.invalid}"/>
                   </div>
 
-                  <mat-error  *ngIf= "registerform.submitted && lastname.invalid">
+                  <mat-error  *ngIf= "lastname.invalid && (lastname.dirty || lastname.touched)">
                   <mat-error *ngIf="lastname.errors?.required">
                     Lastname should be entered
                   </mat-error>
@@ -85,7 +86,7 @@
                       [ngClass]="{'is-invalid':registerform.submitted && email.invalid}"/>
                   </div>
 
-                  <mat-error  *ngIf= "registerform.submitted && email.invalid">
+                  <mat-error  *ngIf= "email.invalid && (email.dirty || email.touched)">
                     <mat-error *ngIf="email.errors?.required">
                       Email should be entered
                     </mat-error>
@@ -104,7 +105,7 @@
                       [pattern]="contactNumberPattern"/>
                     </div>
 
-                     <mat-error *ngIf= "registerform.submitted && contact.invalid">
+                     <mat-error *ngIf= "contact.invalid && (contact.dirty || contact.touched)">
                       <mat-error *ngIf="contact.errors?.required">
                         Contact Number should be entered
                       </mat-error>
@@ -120,16 +121,18 @@
                       <label for="password"><i class="zmdi zmdi-lock"></i></label>
                       <input type="password" name="password" id="password" placeholder="Password"
                       #password="ngModel" [(ngModel)]="userserviceobj.regnew.password"
+                      [type]="hide ? 'password' : 'text'"
                       required
-                      minlength="5"/>
-
+                      minlength="5"
+                      [ngClass]="{'is-invalid':registerform.submitted && password.invalid}"
+                      />
                       <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                       [attr.aria-pressed]="hide">
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                      </button> -->
                     </div>
 
-                     <mat-error *ngIf= "registerform.submitted && password.invalid">
+                     <mat-error *ngIf= "password.invalid && (password.dirty || password.touched)">
                       <mat-error *ngIf="password.errors?.required">
                         Password should be entered
                       </mat-error>
@@ -145,16 +148,20 @@
                       <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                       <input type="password" name="confirmpassword" id="confirmpassword"
                        placeholder="Confirm password"
+                       [type]="hide1 ? 'password' : 'text'"
                       pattern={{password.value}}
                       required
-                      #confirmpassword="ngModel" [(ngModel)]="userserviceobj.regnew.confirmpassword"/>
-                    </div>
+                      #confirmpassword="ngModel" [(ngModel)]="userserviceobj.regnew.confirmpassword"
+                      [ngClass]="{'is-invalid':registerform.submitted && confirmpassword.invalid}"/>
+
                       <!-- <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
                       [attr.aria-pressed]="hide1">
                       <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
                      </button> -->
+                    </div>
 
-                      <mat-error *ngIf= "registerform.submitted && confirmpassword.invalid">
+
+                      <mat-error *ngIf= "confirmpassword.invalid && (confirmpassword.dirty || confirmpassword.touched)">
                         <mat-error *ngIf="confirmpassword.errors?.required">
                           Confirm password should be entered
                         </mat-error>

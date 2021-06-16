@@ -24,8 +24,8 @@ var answerSchema=mongoose.Schema({
   },
   date:{
     type:Date,
-    default:Date()
-    // default:date.format(Date.now(), 'DD-[MM]-YYYY')
+    // default:Date()
+    default:(Date.now(), "%Y-%m-%d")
   },
 
   pictureid:{

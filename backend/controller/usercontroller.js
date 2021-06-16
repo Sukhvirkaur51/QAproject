@@ -394,7 +394,7 @@ var storage=multer.diskStorage({
 
   // like answers
   module.exports.likes=(req,res)=>{
-  ansData.findOneAndUpdate(req.body.answerid,{$push:{likes:req.userid}},{new:true})
+  ansData.findByIdAndUpdate(req.body.answerid,{$push:{userid:req.params.userid}},{new:true})
   .then((docs)=>{
 
       return res.status(200).json({
@@ -416,7 +416,7 @@ var storage=multer.diskStorage({
 
   // unlike answers
   module.exports.unlikes=(req,res)=>{
-    ansData.findByIdAndUpdate(req.body.answerid,{$pull:{likes:req.userid}},{new:true})
+    ansData.findByIdAndUpdate(req.body.answerid,{$pull:{userid:req.params.userid}},{new:true})
     .then((docs)=>{
 
         return res.status(200).json({

@@ -98,9 +98,9 @@ this.userserviceobj.displayallans().subscribe((res)=>{
 
 
 incLikes(){
-//   this.userserviceobj.updatelike().subscribe(()=>{
-
-//   })
+  this.userserviceobj.updatelike(this.ans._id).subscribe((res)=>{
+   console.log(res);
+  })
 
 }
 
