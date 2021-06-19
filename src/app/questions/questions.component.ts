@@ -15,7 +15,7 @@ import { UserService } from '../shared/user.service';
 export class QuestionsComponent implements OnInit {
 
   constructor(public dialog:MatDialog, public userserviceobj:UserService, private router:Router) { }
-
+countLikes:number=0
 
   id:any;
   successalert:boolean=false;
@@ -38,6 +38,11 @@ export class QuestionsComponent implements OnInit {
   proimage1:any=[];
    result : any[] = [];
 
+   likearray:any=[];
+   likearray1:any=[];
+   likearray2:any=[];
+   totallikes!:number
+
   ngOnInit(): void {
 
     this.id=this.userserviceobj.getuserid();
@@ -52,7 +57,8 @@ this.userserviceobj.displayallans().subscribe((res)=>{
       this.ansresponse=res;
       this.answ=this.ansresponse.data;
       console.log(this.answ);
-      },(err)=>{
+      }
+      ,(err)=>{
         console.log(err);
       })
 
@@ -97,14 +103,35 @@ this.userserviceobj.displayallans().subscribe((res)=>{
   }
 
 
-incLikes(){
-  this.userserviceobj.updatelike(this.ans._id).subscribe((res)=>{
-   console.log(res);
-  })
+incLikes(f:NgForm){
 
+
+
+  this.userserviceobj.updatelike(f.value).subscribe((res)=>{
+   console.log(res);
+
+ },(err)=>{
+  console.log(err);
+})
+
+
+  // this.userserviceobj.updateunlike(f.value).subscribe((res)=>{
+  //   console.log(res);
+  //  })
+
+
+  this.userserviceobj.displayallans().subscribe((res)=>{
+    this.ansresponse=res;
+    this.answ=this.ansresponse.data;
+    console.log(this.answ);
+    }
+    ,(err)=>{
+      console.log(err);
+    }
+    )
 }
 
-decLikes(){
+disLikes(f:NgForm){
 
 }
 

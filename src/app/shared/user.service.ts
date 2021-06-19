@@ -4,6 +4,7 @@ import{User,Loginuser} from './user.model';
 import{Question} from './question.model';
 import{Addcredentials} from './addcredentials.model';
 import{Answer} from './answer.model'
+import { Likes } from './likes.model';
 
 @Injectable({
   providedIn: 'root'
@@ -70,14 +71,20 @@ public addcred:Addcredentials={
 };
 
 public answers:Answer={
+  _id:'',
   answer:'',
   questionid:'',
   userid:this.getuserid(),
   credentialid:'',
   pictureid:'',
   date:'',
-  likes:''
+  likes:this.getuserid()
 };
+
+// public like:Likes={
+//   answerid:'',
+//   likes:this.getuserid()
+// }
 
 
   constructor(private http:HttpClient) { }
@@ -167,7 +174,11 @@ displayuserimage(id:any){
 
 
 updatelike(data:any){
-  return this.http.put(`${'http://localhost:3200/updatelikes'}/${this.getuserid()}`,data);
+  return this.http.put('http://localhost:3200/updatelikes',data);
+}
+
+updateunlike(data:any){
+  return this.http.put('http://localhost:3200/updateunlikes',data);
 }
 
 
@@ -178,9 +189,13 @@ forgetpassword(user:User){
 
 //resetpassword
 resetpassword(password:User){
-  return this.http.post('http://localhost:3200/resetpass/:token',password);
+  return this.http.post('http://localhost:3200/resetpassword/:token',password);
 
 }
+
+// addlikes(like:Likes){
+//   return this.http.post('http://localhost:3200/likes',like);
+// }
 
 
 //use localstorage to store token

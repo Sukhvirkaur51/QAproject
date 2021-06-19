@@ -76,7 +76,7 @@
 
         <div class="container Heading shadow-sm p-3 bg-body rounded ">
 
-          <div *ngFor="let ans1 of answ">
+          <div *ngFor="let ans1 of answ; let i=index">
 
            <span class="username">
 
@@ -86,9 +86,9 @@
            <span class="follow ml-2"><a href="#">Follow</a></span>
            <br>
            <span class="follow mt-0"> Lives in
-             {{ans1.credentialid.address}}
+             {{ans1.credentialid.address}},
             </span>
-           <span class="follow">{{ans1._id.date}}</span>
+           <span class="follow">{{ans1._id.date | date}}</span>
            <div class="question mt-3">
               <a href="#">
                 {{ans1.questionid.question}}
@@ -97,10 +97,47 @@
            <div class="info">
              {{ans1._id.answer}}
            </div>
+
            <div class="bottom">
-             <button type="submit"  mat-flat-button ><i class="fa fa-thumbs-up" (click)="incLikes()"> 0 likes </i></button>
-             <button type="submit" mat-flat-button ><i class="fa fa-thumbs-down" (click)="decLikes()"> 2.1k</i></button>
+             <form #likeform="ngForm" class="form"
+             (ngSubmit)="incLikes(likeform)">
+
+            <input
+            type="hidden"
+            name="_id"
+            #_id="ngModel"
+            [(ngModel)]="ans1._id._id">
+
+            <input
+            type="hidden"
+            name="likes"
+            #likes="ngModel"
+            [(ngModel)]="userserviceobj.answers.likes">
+
+             <button type="submit"  mat-flat-button ><i class="fa fa-thumbs-up "> {{ans1._id.likes.length}} likes </i></button>
+
+            </form>
+
+            <form #dislikeform="ngForm"  class="form"
+             (ngSubmit)="disLikes(dislikeform)">
+
+            <input
+            type="hidden"
+            name="_id"
+            #_id="ngModel"
+            [(ngModel)]="ans1._id._id">
+
+            <input
+            type="hidden"
+            name="likes"
+            #likes="ngModel"
+            [(ngModel)]="userserviceobj.answers.likes">
+
+             <button type="submit" mat-flat-button ><i class="fa fa-thumbs-down "> 2.1k</i></button>
+             </form>
+
              <button type="submit"  mat-flat-button ><i class="fa fa-share" ng-click="incrementLikes(technology)">4.3k</i></button>
+
              <mat-accordion>
               <mat-expansion-panel hideToggle class="expansiontittle mt-3">
                 <mat-expansion-panel-header class="expansiontittle">

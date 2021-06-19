@@ -11,7 +11,15 @@ import { UserService } from '../shared/user.service';
 })
 export class AnswersComponent implements OnInit {
 
+  // showdiv=false;
+  indexHidden:number=-1
+
   constructor(public userserviceobj:UserService,private dialog:MatDialog,private router:Router) { }
+
+  // togglediv(id:number){
+  //   this.showdiv=!this.showdiv
+
+  // }
 
 
   successalert:boolean=false;
@@ -121,6 +129,7 @@ this.userserviceobj.displayallques().subscribe((res)=>{
 
 successclosealert(){
   this.successalert=false;
+  this.indexHidden=1
   this.router.navigateByUrl('/profile')
 }
 

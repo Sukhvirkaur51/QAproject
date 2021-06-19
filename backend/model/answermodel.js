@@ -24,8 +24,7 @@ var answerSchema=mongoose.Schema({
   },
   date:{
     type:Date,
-    // default:Date()
-    default:(Date.now(), "%Y-%m-%d")
+    default:Date.now()
   },
 
   pictureid:{
@@ -34,7 +33,12 @@ var answerSchema=mongoose.Schema({
   },
 
   likes:[{type:mongoose.Schema.Types.ObjectId,
-    ref:'register'}]
+    ref:'register'}],
+
+    likecount:{
+      type:Number
+    }
+
 
 });
 

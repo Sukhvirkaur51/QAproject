@@ -63,8 +63,13 @@
 
 
       <!--  div1 to show question -->
-      <div class="toanswer">
-        <div class="container Heading shadow-sm p-3 bg-body rounded " *ngFor="let que1 of que">
+
+      <div class="toanswer" *ngFor="let que1 of que; let i=index" >
+        <div *ngIf="i!=indexHidden">
+        <div class="container Heading shadow-sm p-3 bg-body rounded " >
+
+          <!-- <span [attr.id]="i">{{i}}</span> -->
+
           <span class="follow">
             Question added.
           </span>
@@ -84,7 +89,7 @@
           <div class="bottomdiv">
 
             <!--  div1.2 for show answer panel -->
-               <mat-accordion>
+              <mat-accordion>
               <mat-expansion-panel hideToggle class="expansiontittle mt-3">
                 <mat-expansion-panel-header class="expansiontittle">
                   <mat-panel-title class="expansiontittle">
@@ -150,6 +155,7 @@
                         [(ngModel)]="userserviceobj.answers.answer"
                         required
                         [ngClass]="{'is-invalid':answerform.submitted && answer.invalid}"
+
                         ></textarea>
                       </mat-form-field>
                       <mat-error  *ngIf= "answerform.submitted && answer.invalid">
@@ -158,9 +164,9 @@
                         </mat-error>
                         </mat-error>
                         <br><br>
+                        <!-- (click)="indexHidden=i" -->
 
-
-                      <button type="submit" class="postbtn" mat-stroked-button >Post</button>
+                      <button type="submit"  class="postbtn" mat-stroked-button >Post</button>
                       <button type="button" class="draftbtn mt-2" mat-stroked-button >Save Draft</button>
 
                     </form>
@@ -172,6 +178,7 @@
              </mat-accordion>
           </div>
        </div>
+      </div>
      </div>
 
 

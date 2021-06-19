@@ -77,7 +77,7 @@ const routes: Routes = [
     component:ForgetpassComponent
   },
   {
-    path:'resetpass',
+    path:'resetpassword',
     component:ResetpassComponent
   }
 ];

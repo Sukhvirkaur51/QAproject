@@ -11,12 +11,14 @@ require('../model/questionmodel');
 require('../model/addcredmodel');
 require('../model/answermodel');
 require('../model/profilemodel');
+require('../model/likemodel');
 
 var regData=mongoose.model('register');
 var queData=mongoose.model('question');
 var credData=mongoose.model('addcredentials');
 var ansData=mongoose.model('answer');
 var proData=mongoose.model('profilepicture');
+var likeData=mongoose.model('likes')
 
 const passport = require('passport');
 const jwt=require('jsonwebtoken');
@@ -394,7 +396,11 @@ var storage=multer.diskStorage({
 
   // like answers
   module.exports.likes=(req,res)=>{
-  ansData.findByIdAndUpdate(req.body.answerid,{$push:{userid:req.params.userid}},{new:true})
+    // likecount=0
+    // likecount=likecount++
+
+  ansData.findByIdAndUpdate({_id:req.body._id},
+    {$push:{likes:req.body.likes}},{new:true})
   .then((docs)=>{
 
       return res.status(200).json({
@@ -416,7 +422,7 @@ var storage=multer.diskStorage({
 
   // unlike answers
   module.exports.unlikes=(req,res)=>{
-    ansData.findByIdAndUpdate(req.body.answerid,{$pull:{userid:req.params.userid}},{new:true})
+    ansData.findByIdAndUpdate({_id:req.body._id},{$pull:{likes:req.body.likes}},{new:true})
     .then((docs)=>{
 
         return res.status(200).json({
@@ -467,7 +473,7 @@ var storage=multer.diskStorage({
         }
 
        const token=crypto.randomBytes(16).toString('hex');
-       const link ='http://localhost:3200/resetpassword/'+token;
+       const link ='http://localhost:4200/resetpassword?token='+token;
 
        user.resettoken=token;
        user.expiretoken=Date.now()+3600000;
@@ -527,4 +533,29 @@ var storage=multer.diskStorage({
 
       })
     }
+
+
+//     module.exports.addlikes=(req,res)=>{
+//       var like=new likeData({
+//           answerid:req.body.answerid,
+//           likes:req.body.likes,
+
+
+//       });
+// like.countlikes+=1;
+//       like.save().then((docs)=>{
+//           return res.status(200).json({
+//               message:"likes increment",
+//               success:true,
+//               data:docs
+
+//           })
+//       }).catch((err)=>{
+//           return res.status(401).json({
+//               message:"error in increment",
+//               success:false,
+//               error:err.message
+//           })
+//       })
+//   }
 
