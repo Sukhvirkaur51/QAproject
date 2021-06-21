@@ -95,7 +95,7 @@
               </a>
            </div>
            <div class="info">
-             {{ans1._id.answer}}
+             {{ans1._id.answer | titlecase }}
            </div>
 
            <div class="bottom">
@@ -114,7 +114,9 @@
             #likes="ngModel"
             [(ngModel)]="userserviceobj.answers.likes">
 
-             <button type="submit"  mat-flat-button ><i class="fa fa-thumbs-up "> {{ans1._id.likes.length}} likes </i></button>
+            <!-- {{ans1._id.likes.length}} -->
+
+             <button type="submit"  mat-flat-button ><i class="fa fa-thumbs-up "> {{ans1._id.likes.length}} </i></button>
 
             </form>
 
@@ -133,10 +135,10 @@
             #likes="ngModel"
             [(ngModel)]="userserviceobj.answers.likes">
 
-             <button type="submit" mat-flat-button ><i class="fa fa-thumbs-down "> 2.1k</i></button>
+             <button type="submit" mat-flat-button ><i class="fa fa-thumbs-down "> 20</i></button>
              </form>
 
-             <button type="submit"  mat-flat-button ><i class="fa fa-share" ng-click="incrementLikes(technology)">4.3k</i></button>
+             <button type="submit"  mat-flat-button ><i class="fa fa-share" ng-click="incrementLikes(technology)">10</i></button>
 
              <mat-accordion>
               <mat-expansion-panel hideToggle class="expansiontittle mt-3">
@@ -250,40 +252,35 @@
       <div class=" Heading pt-2 shadow-sm   bg-body rounded">
         <p><button mat-button>Improve Your Account</button></p>
       </div>
-     <!-- <table class="tablebox"> -->
          <div class="container-fluid Heading shadow-sm bg-body rounded box btndiv">
-           <!-- <tr><a href="#">Follow interesting Peoples.</a></tr> -->
            <button mat-button class="btn-block">Follow interesting Peoples</button>
          </div>
          <div class="container-fluid Heading shadow-sm bg-body rounded btndiv">
-           <!-- <tr><a routerLink="/addque">Ask a Question</a> -->
            <button mat-button  class="btn-block" (click)="openDialogue()">Ask a question</button>
 
          </div>
          <div class="container-fluid Heading shadow-sm bg-body rounded btndiv">
-           <!-- <tr><a routerLink="/answer">Answer a Question</a></tr> -->
            <button mat-button class="btn-block" (click)="giveans()">Answer a Question</button>
          </div>
-        <!-- </table> -->
         <div class="container Heading pt-2 shadow-sm p-3 mt-4 bg-body rounded">
           <p><a href="#">Links to Follow</a></p>
         </div>
         <table class="tablebox">
           <div class="container-fluid Heading shadow-sm bg-body rounded box">
-            <tr><a href="#">Our Teachers on Udemy</a></tr>
+            <tr><a href="https://www.udemy.com">Our Teachers on Udemy</a></tr>
           </div>
           <div class="container-fluid Heading shadow-sm bg-body rounded">
-            <tr><a href="#">Improve Communication skills</a>
+            <tr><a href="https://www.grammarly.com">Improve Communication skills</a>
             </tr>
           </div>
           <div class="container-fluid Heading shadow-sm bg-body rounded">
-            <tr><a href="#">Learn MS Excel</a></tr>
+            <tr><a href="https://www.javatpoint.com/excel-tutorial">Learn MS Excel</a></tr>
           </div>
           <div class="container-fluid Heading shadow-sm bg-body rounded">
-            <tr><a href="#">Stock Investment Ideas</a></tr>
+            <tr><a href="https://www.angular.io">Learn Angular</a></tr>
           </div>
           <div class="container-fluid Heading shadow-sm bg-body rounded">
-            <tr><a href="#">Learn MEAN Stack</a></tr>
+            <tr><a href="https://www.tutorialspoint.com/meanjs/index.htm">Learn MEAN Stack</a></tr>
           </div>
          </table>
       </div>

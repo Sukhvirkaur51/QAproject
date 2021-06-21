@@ -186,7 +186,7 @@
                                     <label>Date Of Birth</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>{{cred1.dateofbirth}}</p>
+                                    <p>{{cred1.dateofbirth | date}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -276,7 +276,7 @@
                                        <button type="submit" mat-flat-button ><i class="fa fa-italic"></i></button>
                                         <button type="submit" mat-flat-button ><i class="fa fa-list-ol"></i></button>
                                         <button type="submit" mat-flat-button ><i class="fa fa-list-ul"></i></button>
-                                    </div>
+
                                     <div class="inputans">
                                       <div *ngFor="let cred1 of cred">
                                       <form #answerform="ngForm" (ngSubmit)="postans(answerform)">
@@ -329,6 +329,7 @@
 
 
                                      </form>
+                                    </div>
                                     </div>
                                     </div>
                                   </div>

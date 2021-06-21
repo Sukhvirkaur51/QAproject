@@ -261,8 +261,8 @@ editcred(){
  }
  editprofile(){
    this.dialog.open(EditprofileComponent ,{
-    height: '700px',
-    width: '800px'});
+    height: '800px',
+    width: '700px'});
  }
 
 }
