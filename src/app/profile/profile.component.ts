@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
 
 
   id:any;
+  f!:NgForm;
 
   successalert:boolean=false;
   failalert:boolean=false
@@ -147,6 +148,17 @@ localUrl:any
 
 }
 
+anscond(){
+  if(this.cred.length==0 || this.proimage1==undefined){
+    alert("make your profile strong by adding credentials and profile picture before giving an answer")
+    }
+
+  else{
+    this.postans(this.f);
+  }
+
+}
+
 
 // submit answers
 postans(f:NgForm){
@@ -162,6 +174,7 @@ postans(f:NgForm){
    this.failalert= true;
 
  })
+
 }
 
 

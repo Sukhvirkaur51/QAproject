@@ -21,7 +21,7 @@ export class AnswersComponent implements OnInit {
 
   // }
 
-
+  f!:NgForm;
   successalert:boolean=false;
   failalert:boolean=false
 
@@ -104,6 +104,19 @@ this.userserviceobj.displayallques().subscribe((res)=>{
 
 }
 
+
+anscond(){
+  if(this.cred.length==0 || this.proimage1==undefined){
+    alert("make your profile strong by adding credentials and profile picture before giving an answer")
+    this.router.navigateByUrl('/profile')
+    }
+
+  else{
+    this.postans(this.f);
+  }
+
+}
+
   postans(f:NgForm){
   //  console.log(f.value);
   this.userserviceobj.addanswer(f.value).subscribe((res)=>{
@@ -123,9 +136,6 @@ this.userserviceobj.displayallques().subscribe((res)=>{
   })
 }
 
-// close(){
-//   this.dialog.closeAll();
-// }
 
 successclosealert(){
   this.successalert=false;

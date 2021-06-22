@@ -99,7 +99,7 @@
            </div>
 
            <div class="bottom">
-             <form #likeform="ngForm" class="form"
+             <form #likeform="ngForm" class="d-inline"
              (ngSubmit)="incLikes(likeform)">
 
             <input
@@ -120,7 +120,7 @@
 
             </form>
 
-            <form #dislikeform="ngForm"  class="form"
+            <form #dislikeform="ngForm"  class="d-inline"
              (ngSubmit)="disLikes(dislikeform)">
 
             <input
@@ -135,10 +135,10 @@
             #likes="ngModel"
             [(ngModel)]="userserviceobj.answers.likes">
 
-             <button type="submit" mat-flat-button ><i class="fa fa-thumbs-down "> 20k</i></button>
+             <button type="submit" class="d-inline" mat-flat-button ><i class="fa fa-thumbs-down "> 20k</i></button>
              </form>
 
-             <button type="submit"  mat-flat-button ><i class="fa fa-share" ng-click="incrementLikes(technology)">10</i></button>
+             <button type="submit"  mat-flat-button ><i class="fa fa-share">10</i></button>
 
              <mat-accordion>
               <mat-expansion-panel hideToggle class="expansiontittle mt-3">
